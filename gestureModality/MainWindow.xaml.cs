@@ -23,10 +23,12 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
     using System.Windows.Media;
     using System.Timers;
     using System.Linq;
+    using System.Windows.Controls.Primitives;
 
     /// <summary>
     /// Interaction logic for the MainWindow
     /// </summary>
+    /// 
 
     public class MouseCoo
     {
@@ -46,6 +48,12 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         {
             Console.WriteLine("Kinect stopped receving.");
             main.SetState("deactive");
+        }
+
+        private void Button_Help(object sender, RoutedEventArgs e)
+        {
+            HelpWindow window = new HelpWindow();
+            window.Show();
         }
 
         private void ActivateMouse(Object source, ElapsedEventArgs e)
