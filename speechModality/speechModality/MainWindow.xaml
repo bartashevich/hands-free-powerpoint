@@ -1,0 +1,17 @@
+﻿<Window x:Class="speechModality.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:speechModality"
+        mc:Ignorable="d"
+        Title="Maria" Height="190" Width="300">
+    <Grid>
+        <Ellipse x:Name="circle" Width="50" Height="50" VerticalAlignment="Top" Fill="Gray" Margin="20"></Ellipse>
+        <TextBox x:Name="maria" HorizontalAlignment="Center" Height="20" Margin="20,90,20,0" TextAlignment="Center" TextWrapping="Wrap" Text="Diz 'Oh Maria' para ativar." VerticalAlignment="Top" Width="250" FontSize="14" BorderThickness="0" IsReadOnly="True"/>
+        <TextBox x:Name="help" HorizontalAlignment="Center" Height="20" Margin="20,115,20,0" TextAlignment="Center" TextWrapping="Wrap" Text="Pede ajuda dizendo 'Preciso de Ajuda'." VerticalAlignment="Top" Width="250" FontSize="14" BorderThickness="0" IsReadOnly="True"/>
+        <!--<TextBox x:Name="result" HorizontalAlignment="Left" Height="40" Margin="20,90,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="380" FontSize="20" IsReadOnly="True" />-->
+        <!--<TextBox x:Name="confidence" HorizontalAlignment="Left" Height="40" Margin="10,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="449" FontSize="20" />-->
+
+    </Grid>
+</Window>

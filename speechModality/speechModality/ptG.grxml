@@ -1,0 +1,379 @@
+﻿<?xml version="1.0"?>
+<grammar xml:lang="pt-PT" version="1.0" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+
+	<rule id="rootRule" scope="public">
+		<one-of>
+			<item>
+				<ruleref uri="#activation"/>
+			</item>
+			<item>
+				<ruleref uri="#help"/>
+			</item>
+			<item>
+				<ruleref uri="#confirmation"/>
+			</item>
+			<item>
+				<ruleref uri="#email"/>
+			</item>
+			<item>
+				<ruleref uri="#sound"/>
+			</item>
+			<item>
+				<ruleref uri="#weather"/>
+			</item>
+			<item>
+				<ruleref uri="#calculator"/>
+			</item>
+			<item>
+				<ruleref uri="#slides"/>
+			</item>
+			<item>
+				<ruleref uri="#power"/>
+			</item>
+			<item>
+				<ruleref uri="#movie"/>
+			</item>
+			<item>
+				<ruleref uri="#time"/>
+			</item>
+		</one-of>
+	</rule>
+
+	<rule id="activation">
+		<item>
+			ó maria<tag>out.action="ACTIVATE"</tag>
+		</item>
+	</rule>
+
+	<rule id="help">
+		<item>
+			<one-of>
+				<item>Preciso de ajuda</item>
+				<item>Ajuda</item>
+				<item>O que sabes fazer?</item>
+				<item>Que coisas te posso dizer?</item>
+			</one-of>
+			<tag>out.action="HELP"</tag>
+		</item>
+	</rule>
+	
+	<rule id="confirmation">
+		<item>
+			<one-of>
+				<item>
+					<one-of>
+						<item>Sim</item>
+						<item>Ok</item>
+						<item>Sim, quero</item>
+						<item>Quero, sim</item>
+						<item>Claro</item>
+						<item>Claro que sim</item>
+						<item>Com certeza</item>
+						<item>Pode ser</item>
+						<item>Está bem</item>
+					</one-of>
+					<tag>out.action="YES"</tag>
+				</item>
+				<item>
+					<one-of>
+						<item>Não</item>
+						<item>Não quero</item>
+						<item>Não, não quero</item>
+						<item>Claro que não</item>
+						<item>Nem pensar</item>
+						<item>Nada disso</item>
+					</one-of>
+					<tag>out.action="NO"</tag>
+				</item>
+			</one-of>
+		</item>
+	</rule>
+	
+	<rule id="email">
+		<item>
+			<one-of>
+				<item>
+					<one-of>
+						<item>Cria</item>
+						<item>Abre</item>
+						<item>Envia</item>
+						<item>Preciso de enviar</item>
+						<item>Escreve</item>
+					</one-of>
+					<one-of>
+						<item>um</item>
+						<item>um novo</item>
+						<item>o</item>
+					
+					</one-of>
+					<one-of>
+						<item>email</item>
+						<item>mail</item>
+					</one-of>
+				</item>
+				<item>
+					<one-of>
+						<item>Avisa</item>
+						<item>Diz</item>
+					</one-of>
+				</item>
+			</one-of>
+			<tag>out.action="OPEN_EMAIL"</tag>
+		</item>
+		<item repeat="0-1">
+			<item>
+				<one-of>
+					<item>ao</item>
+					<item>à</item>
+					<item>para o</item>
+					<item>para a</item>
+				</one-of>
+			</item>
+			<item>
+				<ruleref uri="#person"/>
+				<tag>out.person=rules.latest();</tag>
+			</item>
+		</item>
+		<item repeat="0-1">
+			<item>
+				<one-of>
+					<item>a dizer que</item>
+					<item>a avisar que</item>
+					<item>que</item>
+				</one-of>
+			</item>
+			<item>
+				<one-of>
+					<item>
+						<one-of>
+							<item>estou atrasado</item>
+							<item>estou um pouco atrasado</item>
+							<item>vou chegar atrasado</item>
+						</one-of>
+						<tag>out.subject="LATE"</tag>
+					</item>	
+					<item>estou a caminho <tag>out.subject="GOING"</tag></item>
+					<item>
+						<one-of>
+							<item>telefono</item>
+							<item>ligo</item>
+						</one-of>
+						<item>mais</item>
+						<one-of>
+							<item>logo</item>
+							<item>tarde</item>
+						</one-of>
+						<tag>out.subject="CALL_LATER"</tag>
+					</item>		
+				</one-of>
+			</item>
+		</item>
+	</rule>
+
+	<rule id="person">
+		<one-of>
+			<item>Joana<tag>out="JOANA"</tag></item>
+			<item>Denis<tag>out="DENIS"</tag></item>
+			<item>Leonardo<tag>out="LEONARDO"</tag></item>
+			<item>Ti<tag>out="ASSISTANT"</tag></item>
+			<item>Maria<tag>out="ASSISTANT"</tag></item>
+		</one-of>
+	</rule>
+
+	<rule id="sound">
+		<one-of>
+      <item>
+        <one-of>
+          <item>preciso de som</item>
+          <item>som</item>
+          <item>ativar som</item>
+          <item>ligar som</item>
+        </one-of>
+        <tag>out.action="UNMUTE"</tag>
+      </item>
+			<item>
+				<one-of>
+					<item>silêncio</item>
+					<item>preciso de silêncio</item>
+				</one-of>
+				<tag>out.action="MUTE"</tag>
+			</item>
+			<item>
+				<one-of>
+					<item>mais baixo</item>
+					<item>está muito alto</item>
+				</one-of>
+				<tag>out.action="VOLUME_DOWN"</tag>
+			</item>
+			<item>
+				<one-of>
+					<item>mais alto</item>
+				</one-of>
+				<tag>out.action="VOLUME_UP"</tag>
+			</item>
+			</one-of>
+	</rule>
+	
+	<rule id="weather">
+		<item>
+			<one-of>
+				<item>será que vai chover</item>
+				<item>será que vai estar sol</item>
+				<item>qual é o tempo para</item>
+				<item>que tempo está</item>
+			</one-of>
+			<tag>out.action="OPEN_WEATHER"</tag>
+		</item>
+		<one-of>
+			<item>hoje<tag>out.when="TODAY"</tag></item>
+			<item>agora<tag>out.when="TODAY"</tag></item>
+			<item>amanhã<tag>out.when="TOMORROW"</tag></item>
+		</one-of>
+	</rule>
+	
+	<rule id="calculator">
+		<item>
+			<one-of>
+				<item>
+					<one-of>
+						<item>preciso de</item>
+						<item>quero</item>
+					</one-of>
+					<one-of>
+						<item>fazer uma conta</item>
+						<item>fazer um cálculo</item>
+					</one-of>
+				</item>
+				<item>abre a calculadora</item>
+			</one-of>
+			<tag>out.action="OPEN_CALCULATOR"</tag>
+		</item>
+	</rule>
+	
+	<rule id="slides">
+		<one-of>
+			<item>
+				<one-of>
+					<item>slide seguinte</item>
+					<item>próximo slide</item>
+					<item>seguinte</item>
+					<item>próximo</item>
+					<item>
+						<one-of>
+							<item>muda para o</item>
+							<item>avança para o</item>
+							<item>coloca o</item>
+							<item>vai para o</item>
+						</one-of>
+						<one-of>
+							<item>próximo slide</item>
+							<item>slide a seguir</item>
+							<item>slide seguinte</item>
+							<item>slide à frente</item>
+						</one-of>
+					</item>
+				</one-of>
+				<tag>out.action="NEXT_SLIDE"</tag>
+			</item>
+			<item>
+				<one-of>
+					<item>slide anterior</item>
+					<item>anterior</item>
+					<item>
+						<one-of>
+							<item>muda para p</item>
+							<item>volta ao</item>
+							<item>coloca o</item>
+							<item>vai para o</item>
+						</one-of>
+						<one-of>
+							<item>slide anterior</item>
+							<item>slide atrás</item>
+						</one-of>
+					</item>
+				</one-of>
+				<tag>out.action="PREVIOUS_SLIDE"</tag>
+			</item>
+		</one-of>
+	</rule>
+	
+	<rule id="power">
+		<item>
+			<one-of>
+				<item>
+					<one-of>
+						<item>Suspende-te</item>
+						<item>Desliga-te</item>
+					</one-of>
+					<tag>out.action="SUSPEND"</tag>
+				</item>
+				<item>
+					<one-of>
+						<item>Vou sair, até logo</item>
+						<item>Vou sair</item>
+						<item>Até logo</item>
+						<item>Desliga-te</item>
+					</one-of>
+					<tag>out.action="MAY_SUSPEND"</tag>
+				</item>		
+			</one-of>
+		</item>
+	</rule>
+
+	<rule id="movie">
+		<one-of>
+			<item>
+				<one-of>
+					<item>pausa o filme</item>
+					<item>pausa a música</item>
+					<item>pausa</item>
+				</one-of>
+				<tag>out.action="PAUSE"</tag>
+			</item>
+			<item>
+				<one-of>
+					<item>retoma o filme</item>
+					<item>retoma a música</item>
+					<item>retoma</item>
+					<item>continua</item>
+				</one-of>
+				<tag>out.action="PLAY"</tag>
+			</item>
+		</one-of>
+	</rule>
+
+	<rule id="time">
+		<item>
+			<one-of>
+				<item>Horas</item>
+				<item>Que horas são</item>
+			</one-of>
+			<tag>
+				out.action="TIME"
+			</tag>
+		</item>
+
+		<item repeat="0-1">
+			<item>
+				<ruleref uri="#place"/>
+				<tag>out.where=rules.latest();</tag>
+			</item>
+		</item>
+	</rule>
+
+	<rule id="place">
+		<one-of>
+			<item>em Aveiro<tag>out="AVEIRO"</tag></item>
+			<item>no Porto<tag>out="PORTO"</tag></item>
+			<item>em Lisboa<tag>out="LISBON"</tag></item>
+			<item>em Moscovo<tag>out="MOSCOW"</tag></item>
+			<item>em Madrid<tag>out="MADRID"</tag></item>
+			<item>em Paris<tag>out="PARIS"</tag></item>
+			<item>em Londres<tag>out="LONDON"</tag></item>
+			<item>em Berlim<tag>out="BERLIM"</tag></item>
+			<item>em Tóquio<tag>out="TOKYO"</tag></item>
+			<item>em Brasília<tag>out="BRASILIA"</tag></item>
+		</one-of>
+	</rule>
+
+</grammar>
