@@ -56,6 +56,24 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             window.Show();
         }
 
+        private void button_test_1(object sender, RoutedEventArgs e)
+        {
+            SendCommand("color\",\"YELLOW");
+            Console.WriteLine("Test YELLOW");
+        }
+
+        private void button_test_2(object sender, RoutedEventArgs e)
+        {
+            SendCommand("color\",\"BLUE");
+            Console.WriteLine("Test BLUE");
+        }
+
+        private void button_test_3(object sender, RoutedEventArgs e)
+        {
+            SendCommand("color\",\"BROWN");
+            Console.WriteLine("Test BROWN");
+        }
+
         private void ActivateMouse(Object source, ElapsedEventArgs e)
         {
             // GUI status update
@@ -494,8 +512,8 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             this.Show();
 
             //init LifeCycleEvents..
-            lce = new LifeCycleEvents("GESTURE", "FUSION", "gesture-1", "gesture", "command"); // LifeCycleEvents(string source, string target, string id, string medium, string mode)
-            mmic = new MmiCommunication("localhost",9876,"User2", "GESTURE");  //PORT TO FUSION - uncomment this line to work with fusion later
+            lce = new LifeCycleEvents("TOUCH", "FUSION", "touch-1", "touch", "command");
+            mmic = new MmiCommunication("localhost", 9876, "User1", "TOUCH");  //CHANGED To user1
             //mmic = new MmiCommunication("localhost", 8000, "User1", "ASR"); // MmiCommunication(string IMhost, int portIM, string UserOD, string thisModalityName)
 
             mmic.Send(lce.NewContextRequest());
@@ -574,7 +592,10 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             // IMPORTANT TO KEEP THE FORMAT {"recognized":["SHAPE","COLOR"]}
             string json = "{ \"recognized\":[\"" + command + "\"] }";
 
-            var exNot = lce.ExtensionNotification("", "", 100, json);
+            Console.WriteLine(json);
+
+            var exNot = lce.ExtensionNotification("-1", "-1", 1.0f, json);
+            //var exNot = lce.ExtensionNotification("", "", 100, json);
             mmic.Send(exNot);
         }
 

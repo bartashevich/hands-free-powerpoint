@@ -44,5 +44,23 @@ namespace speechModality
                 else circle.Fill = Brushes.Gray;
             });
         }
+
+        private void button_test_1(object sender, RoutedEventArgs e)
+        {
+            _sm.SendCommand("shape\",\"SQUARE");
+            Console.WriteLine("Test SQUARE");
+        }
+
+        private void button_test_2(object sender, RoutedEventArgs e)
+        {
+            _sm.SendCommand("shape\",\"TRIANGLE");
+            Console.WriteLine("Test 2");
+        }
+
+        private void button_test_3(object sender, RoutedEventArgs e)
+        {
+            _sm.SendCommand("shape\",\"CIRCLE");
+            Console.WriteLine("Test 3");
+        }
     }
 }

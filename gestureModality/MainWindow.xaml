@@ -16,5 +16,20 @@
         <Ellipse x:Name="mouse_status" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="28,38,0,0"></Ellipse>
         <Label x:Name="confidence_percentage" HorizontalAlignment="Right" Height="30" Margin="0,7,0,0" Content="Max confidence: 0 %" VerticalAlignment="Top" Width="177" FontSize="14" BorderThickness="0"/>
         <Label x:Name="gesture_name" HorizontalAlignment="Right" Height="30" Margin="0,31,0,0" Content="Gesture: -" VerticalAlignment="Top" Width="177" FontSize="14" BorderThickness="0"/>
+        <Button Content="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="15"
+            Click="button_test_1" Margin="0,52,0,0" Height="20"/>
+        <Button Content="2"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="15"
+            Click="button_test_2" Margin="15,52,0,0" Height="20"/>
+        <Button Content="3"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="15"
+            Click="button_test_3" Margin="30,52,0,0" Height="20"/>
     </Grid>
 </Window>

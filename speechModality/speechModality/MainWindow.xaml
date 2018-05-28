@@ -7,6 +7,21 @@
         mc:Ignorable="d"
         Title="Maria" Height="190" Width="300">
     <Grid>
+        <Button Content="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="15"
+            Click="button_test_1" Margin="0,52,0,0" Height="20"/>
+        <Button Content="2"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="15"
+            Click="button_test_2" Margin="15,52,0,0" Height="20"/>
+        <Button Content="3"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="15"
+            Click="button_test_3" Margin="30,52,0,0" Height="20"/>
         <Ellipse x:Name="circle" Width="50" Height="50" VerticalAlignment="Top" Fill="Gray" Margin="20"></Ellipse>
         <TextBox x:Name="maria" HorizontalAlignment="Center" Height="20" Margin="20,90,20,0" TextAlignment="Center" TextWrapping="Wrap" Text="Diz 'Oh Maria' para ativar." VerticalAlignment="Top" Width="250" FontSize="14" BorderThickness="0" IsReadOnly="True"/>
         <TextBox x:Name="help" HorizontalAlignment="Center" Height="20" Margin="20,115,20,0" TextAlignment="Center" TextWrapping="Wrap" Text="Pede ajuda dizendo 'Preciso de Ajuda'." VerticalAlignment="Top" Width="250" FontSize="14" BorderThickness="0" IsReadOnly="True"/>

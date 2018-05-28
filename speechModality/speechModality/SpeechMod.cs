@@ -459,6 +459,7 @@ namespace speechModality
                 return;
             }
 
+            
             // send command
             // format {"recognized":["SHAPE","COLOR"]}
             string json = "{ \"recognized\": [";
@@ -474,6 +475,17 @@ namespace speechModality
             mmic.Send(exNot);
 
             
+        }
+
+        public void SendCommand(string command)
+        {
+            //SEND
+            // IMPORTANT TO KEEP THE FORMAT {"recognized":["SHAPE","COLOR"]}
+            string json = "{ \"recognized\":[\"" + command + "\"] }";
+
+            var exNot = lce.ExtensionNotification("", "", 100, json);
+            mmic.Send(exNot);
+            Console.WriteLine(command);
         }
     }
 }
