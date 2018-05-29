@@ -15,11 +15,29 @@ public enum Output implements IOutput{
     CIRCLE_RED("[shape][CIRCLE][color][RED]"),
     CIRCLE_BLUE("[shape][CIRCLE][color][BLUE]"),
     CIRCLE_YELLOW("[shape][CIRCLE][color][YELLOW]"),
-    CIRCLE("[shape][CIRCLE]")
+    CIRCLE("[shape][CIRCLE]"),
+    
+    // STATUS
+    KINECT_ACTIVE("[status][KINECT_ACTIVE]"),
+    KINECT_INACTIVE("[status][KINECT_INACTIVE]"),
+    ASSISTANT_ACTIVE("[status][ASSISTANT_ACTIVE]"),
+    ASSISTANT_INACTIVE("[status][ASSISTANT_INACTIVE]"),
+    MOUSE_ACTIVE("[status][MOUSE_ACTIVE]"),
+    MOUSE_ACTIVATING("[status][MOUSE_ACTIVATING]"),
+    MOUSE_INACTIVE("[status][MOUSE_INACTIVE]"),
+        
+    // SLIDE CONTROL NEXT/PREVIOUS
+    NEXT_SLIDE("[action][NEXT_SLIDE]"),
+    PREV_SLIDE("[action][PREV_SLIDE]"),
+    CLAP("[action][CLAP]"),
+    
+    // COMBO OUTPUT
+    COMBO_LEFT("[combo][LEFT]"),
+    COMBO_RIGHT("[combo][RIGHT]"),
+    COMBO_CHANGE("[combo][CHANGE]"),
+    
+    
     ;
-    
-    
-    
     private String event;
 
     Output(String m) {

@@ -3,33 +3,62 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Microsoft.Samples.Kinect.DiscreteGestureBasics"
         Title="gestureModality"
-        Height="80" Width="265"
-        Closing="MainWindow_Closing"
-        WindowStyle="None">
+        Height="250" Width="250"
+        Closing="MainWindow_Closing">
     <Grid>
-        <Button Content="?"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Width="15"
-                Click="Button_Help"/>
-        <Ellipse x:Name="circle" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="28,14,0,0"></Ellipse>
-        <Ellipse x:Name="mouse_status" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="28,38,0,0"></Ellipse>
-        <Label x:Name="confidence_percentage" HorizontalAlignment="Right" Height="30" Margin="0,7,0,0" Content="Max confidence: 0 %" VerticalAlignment="Top" Width="177" FontSize="14" BorderThickness="0"/>
-        <Label x:Name="gesture_name" HorizontalAlignment="Right" Height="30" Margin="0,31,0,0" Content="Gesture: -" VerticalAlignment="Top" Width="177" FontSize="14" BorderThickness="0"/>
-        <Button Content="1"
+        <Ellipse x:Name="circle" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="223,4,0,0"></Ellipse>
+        <Ellipse x:Name="mouse_status" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="223,63,0,0"></Ellipse>
+        <Label x:Name="confidence_percentage" HorizontalAlignment="Right" Height="30" Margin="0,7,0,0" Content="Max confidence: 0 %" VerticalAlignment="Top" Width="20" FontSize="14" BorderThickness="0"/>
+        <Label x:Name="gesture_name" HorizontalAlignment="Right" Height="30" Margin="0,31,0,0" Content="Gesture: -" VerticalAlignment="Top" Width="12" FontSize="14" BorderThickness="0"/>
+        <Button Content="K ON"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Width="15"
-            Click="button_test_1" Margin="0,52,0,0" Height="20"/>
-        <Button Content="2"
+            Width="51"
+            Click="button_k_on" Margin="5,19,0,0" Height="20"/>
+        <Button Content="K OFF"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Width="15"
-            Click="button_test_2" Margin="15,52,0,0" Height="20"/>
-        <Button Content="3"
+            Width="51"
+            Click="button_k_off" Margin="5,44,0,0" Height="20"/>
+        <Button Content="M ON"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Width="15"
-            Click="button_test_3" Margin="30,52,0,0" Height="20"/>
+            Width="51"
+            Click="button_m_on" Margin="5,74,0,0" Height="20"/>
+        <Button Content="M ACK"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="51"
+            Click="button_m_ack" Margin="5,99,0,0" Height="20"/>
+        <Button Content="M OFF"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="51"
+            Click="button_m_off" Margin="5,124,0,0" Height="20"/>
+        <Button Content="RIGHT"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="51"
+            Click="button_right" Margin="70,19,0,0" Height="20"/>
+        <Button Content="LEFT"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="51"
+            Click="button_left" Margin="70,44,0,0" Height="20"/>
+        <Button Content="CLAP"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="51"
+            Click="button_clap" Margin="135,19,0,0" Height="20"/>
+        <Button Content="NEXT SLIDE"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="77"
+            Click="button_next_slide" Margin="70,74,0,0" Height="20"/>
+        <Button Content="PREV SLIDE"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="77"
+            Click="button_prev_slide" Margin="70,99,0,0" Height="20"/>
     </Grid>
 </Window>

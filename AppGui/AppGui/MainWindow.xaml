@@ -5,5 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppGui"
         mc:Ignorable="d"
-        Title="MainWindow" Height="169.052" Width="240.116">
+        Title="MainWindow" Height="169.052" Width="205.66">
+    <Grid Margin="0,0,2,0">
+        <Label x:Name="combo_name" HorizontalAlignment="Right" Height="30" Margin="0,90,7,0" Content="Combo: -" VerticalAlignment="Top" Width="177" FontSize="14" BorderThickness="0"/>
+        <Label x:Name="action_name" HorizontalAlignment="Right" Height="30" Margin="0,65,7,0" Content="Action: -" VerticalAlignment="Top" Width="177" FontSize="14" BorderThickness="0"/>
+        <Ellipse x:Name="assistant_status" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="94,36,0,0"/>
+        <Label Content="A" HorizontalAlignment="Left" Margin="93,10,0,0" VerticalAlignment="Top"/>
+        <Ellipse x:Name="kinect_status" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="39,36,0,0"/>
+        <Label Content="K" HorizontalAlignment="Left" Margin="38,10,0,0" VerticalAlignment="Top"/>
+        <Ellipse x:Name="mouse_status" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="149,36,0,0"/>
+        <Label Content="M" HorizontalAlignment="Left" Margin="147,10,0,0" VerticalAlignment="Top"/>
+        <Button Content="?"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="20"
+                Margin="167,0,0,0"/>
+    </Grid>
 </Window>

@@ -56,22 +56,68 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             window.Show();
         }
 
-        private void button_test_1(object sender, RoutedEventArgs e)
+        private void button_k_on(object sender, RoutedEventArgs e)
         {
-            SendCommand("color\",\"YELLOW");
-            Console.WriteLine("Test YELLOW");
+            SendCommand("status\",\"KINECT_ACTIVE");
+            Console.WriteLine("Test KINECT_ACTIVE");
         }
 
-        private void button_test_2(object sender, RoutedEventArgs e)
+        private void button_k_off(object sender, RoutedEventArgs e)
         {
-            SendCommand("color\",\"BLUE");
-            Console.WriteLine("Test BLUE");
+            SendCommand("status\",\"KINECT_INACTIVE");
+            Console.WriteLine("Test KINECT_INACTIVE");
         }
 
-        private void button_test_3(object sender, RoutedEventArgs e)
+        private void button_m_on(object sender, RoutedEventArgs e)
         {
-            SendCommand("color\",\"BROWN");
-            Console.WriteLine("Test BROWN");
+            SendCommand("status\",\"MOUSE_ACTIVE");
+            Console.WriteLine("Test MOUSE_ACTIVE");
+        }
+
+        private void button_m_ack(object sender, RoutedEventArgs e)
+        {
+            SendCommand("status\",\"MOUSE_ACTIVATING");
+            Console.WriteLine("Test MOUSE_ACTIVATING");
+        }
+
+        private void button_m_off(object sender, RoutedEventArgs e)
+        {
+            SendCommand("status\",\"MOUSE_INACTIVE");
+            Console.WriteLine("Test MOUSE_INACTIVE");
+        }
+
+        private void button_right(object sender, RoutedEventArgs e)
+        {
+            SendCommand("combo\",\"RIGHT");
+            System.Threading.Thread.Sleep(1000);
+            SendCommand("action\",\"RIGHT");
+            Console.WriteLine("Test RIGHT");
+        }
+
+        private void button_left(object sender, RoutedEventArgs e)
+        {
+            SendCommand("combo\",\"LEFT");
+            System.Threading.Thread.Sleep(1000);
+            SendCommand("action\",\"LEFT");
+            Console.WriteLine("Test LEFT");
+        }
+
+        private void button_next_slide(object sender, RoutedEventArgs e)
+        {
+            SendCommand("action\",\"NEXT_SLIDE");
+            Console.WriteLine("Test NEXT_SLIDE");
+        }
+
+        private void button_prev_slide(object sender, RoutedEventArgs e)
+        {
+            SendCommand("action\",\"PREV_SLIDE");
+            Console.WriteLine("Test PREV_SLIDE");
+        }
+
+        private void button_clap(object sender, RoutedEventArgs e)
+        {
+            SendCommand("action\",\"CLAP");
+            Console.WriteLine("Test CLAP");
         }
 
         private void ActivateMouse(Object source, ElapsedEventArgs e)
@@ -499,7 +545,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         {
             main = this;
 
-            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            /*double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
 
             double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
 
@@ -509,7 +555,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             this.Top = screenHeight - 70;
             this.Left = screenWidth - 255;
             this.Topmost = true;
-            this.Show();
+            this.Show();*/
 
             //init LifeCycleEvents..
             lce = new LifeCycleEvents("TOUCH", "FUSION", "touch-1", "touch", "command");

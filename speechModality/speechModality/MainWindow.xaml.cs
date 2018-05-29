@@ -45,22 +45,36 @@ namespace speechModality
             });
         }
 
-        private void button_test_1(object sender, RoutedEventArgs e)
+        private void button_a_on(object sender, RoutedEventArgs e)
         {
-            _sm.SendCommand("shape\",\"SQUARE");
-            Console.WriteLine("Test SQUARE");
+            _sm.SendCommand("status\",\"ASSISTANT_ACTIVE");
+            Console.WriteLine("Test ASSISTANT_ACTIVE");
         }
 
-        private void button_test_2(object sender, RoutedEventArgs e)
+        private void button_a_off(object sender, RoutedEventArgs e)
         {
-            _sm.SendCommand("shape\",\"TRIANGLE");
-            Console.WriteLine("Test 2");
+            _sm.SendCommand("status\",\"ASSISTANT_INACTIVE");
+            Console.WriteLine("Test ASSISTANT_INACTIVE");
         }
 
-        private void button_test_3(object sender, RoutedEventArgs e)
+        private void button_next_slide(object sender, RoutedEventArgs e)
         {
-            _sm.SendCommand("shape\",\"CIRCLE");
-            Console.WriteLine("Test 3");
+            _sm.SendCommand("action\",\"NEXT_SLIDE");
+            Console.WriteLine("Test NEXT_SLIDE");
+        }
+
+        private void button_prev_slide(object sender, RoutedEventArgs e)
+        {
+            _sm.SendCommand("action\",\"PREV_SLIDE");
+            Console.WriteLine("Test PREV_SLIDE");
+        }
+
+        private void button_change(object sender, RoutedEventArgs e)
+        {
+            _sm.SendCommand("combo\",\"CHANGE");
+            System.Threading.Thread.Sleep(1000);
+            _sm.SendCommand("action\",\"CHANGE");
+            Console.WriteLine("Test CHANGE");
         }
     }
 }

@@ -10,7 +10,19 @@ public enum Speech implements IModality{
 
 	SQUARE("[shape][SQUARE]",1500),
         TRIANGLE("[shape][TRIANGLE]",1500),
-        CIRCLE("[shape][CIRCLE]",1500);
+        CIRCLE("[shape][CIRCLE]",1500),
+        
+        // STATUS
+        ASSISTANT_ACTIVE("[status][ASSISTANT_ACTIVE]",1500),
+        ASSISTANT_INACTIVE("[status][ASSISTANT_INACTIVE]",1500),
+        
+        // SLIDE CONTROL
+        NEXT_SLIDE("[action][NEXT_SLIDE]",1500),
+        PREV_SLIDE("[action][PREV_SLIDE]",1500),
+        CHANGE("[action][CHANGE]",1500),
+        COMBO_CHANGE("[combo][CHANGE]",0),
+        
+        ;
 
 
 private String event; 
