@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
 using System.Windows;
@@ -6,8 +7,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using Microsoft.Win32;
 using mmisharp;
 using Newtonsoft.Json;
+using SavePPTXtoText;
+using SpeakModule;
 
 namespace AppGui
 {
@@ -23,21 +27,96 @@ namespace AppGui
         private Timer comboTimer;
         private string comboString;
 
+        private string pptx_location = null;
+        List<List<string>> FileContent = null;
+        private int pptx_size = 0;
+        private int pptx_current_index = 0;
+        private int pptx_current_block = 0;
+
+
+        private Speaking sm;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            main = this;
+            this.main = this;
 
+            this.sm = new Speaking();
 
             mmiC = new MmiCommunication("localhost",8000, "User1", "GUI");
             mmiC.Message += MmiC_Message;
             mmiC.Start();
 
             //UpdateKinectStatus("active");
-
         }
 
+        // upload file box
+        private void btnOpenFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                pptx_location = openFileDialog.FileName;
+                FileContent = Saver.GetContentFromPPTX(pptx_location);
+                pptx_size = FileContent.Count;
+                pptx_current_index = 0;
+                pptx_current_block = 0;
+
+                sm.Speak("O ficheiro contem " + pptx_size + " diapositivos");
+            }
+        }
+
+        // function to read slides
+        private void Read_Slide(bool read_next)
+        {
+            if(pptx_location == null)
+            {
+                sm.Speak("Não foi especificado ficheiro de apresentação");
+                return;
+            }
+            else if(pptx_size == 0)
+            {
+                sm.Speak("O ficheiro não contem diapositivos");
+                return;
+            }
+            else if(pptx_current_index >= pptx_size || pptx_current_index < 0)
+            {
+                sm.Speak("Chegou ao final da apresentação");
+                return;
+            }
+
+            List<string> slide = FileContent[pptx_current_index];
+            string to_read = "";
+
+            // read first sentence
+            if (!read_next)
+            {
+                pptx_current_block = 0;
+                to_read = slide[pptx_current_block++];
+            }
+            else
+            {
+                if (pptx_current_block >= slide.Count)
+                {
+                    sm.Speak("Não há mais nada para ler neste diapositivo");
+                    return;
+                }
+
+                to_read = slide[pptx_current_block++];
+            }
+
+            try
+            {
+                sm.Speak(to_read);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("error");
+            }
+        }
+
+        // update GUI statuses
         private void UpdateStatus(string status)
         {
             this.Dispatcher.Invoke(() =>
@@ -65,10 +144,70 @@ namespace AppGui
                     case "MOUSE_INACTIVE":
                         mouse_status.Fill = Brushes.Gray;
                         break;
+                    case "VOLUME_ACTIVE":
+                        volume_status.Fill = Brushes.Green;
+                        break;
+                    case "VOLUME_ACTIVATING":
+                        volume_status.Fill = Brushes.Yellow;
+                        break;
+                    case "VOLUME_INACTIVE":
+                        volume_status.Fill = Brushes.Gray;
+                        break;
                 }
             });
         }
 
+        // execute actions
+        private void ExecuteAction(string action)
+        {
+            switch (action)
+            {
+                case "READ_SLIDE":
+                    Read_Slide(false);
+                    break;
+                case "READ_NEXT":
+                    Read_Slide(true);
+                    break;
+                case "NEXT_SLIDE":
+                    if (pptx_location == null)
+                    {
+                        sm.Speak("Não foi especificado ficheiro de apresentação");
+                        return;
+                    }
+
+                    if (pptx_current_index + 1 >= pptx_size)
+                    {
+                        sm.Speak("Não há mais diapositivos");
+                    }
+                    else
+                    {
+                        pptx_current_index++;
+                        pptx_current_block = 0;
+                        InternalFuncions.PowerPointControl("next", 0);
+                    }
+                    break;
+                case "PREV_SLIDE":
+                    if(pptx_location == null)
+                    {
+                        sm.Speak("Não foi especificado ficheiro de apresentação");
+                        return;
+                    }
+
+                    if (pptx_current_index <= 0)
+                    {
+                        sm.Speak("Não há mais diapositivos");
+                    }
+                    else
+                    {
+                        pptx_current_index--;
+                        pptx_current_block = 0;
+                        InternalFuncions.PowerPointControl("previous", 0);
+                    }
+                    break;
+            }
+        }
+
+        // update GUI action
         private void UpdateAction(string action)
         {
             this.Dispatcher.Invoke(() =>
@@ -92,6 +231,7 @@ namespace AppGui
             });
         }
 
+        // update GUI combo
         private void UpdateCombo(string action)
         {
             if(action != "-") {
@@ -168,6 +308,12 @@ namespace AppGui
                 case "action":
                     secondCommand = (string)json.recognized[1].ToString();
                     UpdateAction(secondCommand);
+                    ExecuteAction(secondCommand);
+                    Console.WriteLine(secondCommand);
+                    break;
+                case "volume":
+                    secondCommand = (string)json.recognized[1].ToString();
+                    UpdateAction("volume " + secondCommand + "%");
                     Console.WriteLine(secondCommand);
                     break;
                 case "combo":
@@ -175,7 +321,7 @@ namespace AppGui
                     UpdateCombo(secondCommand);
                     Console.WriteLine(secondCommand);
                     break;
-                case "OPEN_EMAIL":
+                /*case "OPEN_EMAIL":
                     InternalFuncions.SendEmail(json);
                     break;
                 case "MUTE":
@@ -220,7 +366,7 @@ namespace AppGui
                     break;
                 case "PLAY":
                     InternalFuncions.MoviePausePlay();
-                    break;
+                    break;*/
             }
         }
     }

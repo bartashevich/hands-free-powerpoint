@@ -4,13 +4,13 @@ using Spire.Presentation;
 using System.IO;
 using System.Collections.Generic;
 
-namespace SaveTextfromPPT
+namespace SavePPTXtoText
 {
     class Program
     {
         static void Main(string[] args)
         {
-            List<List<string>> FileContent = GetContentFromPPTX("slides.pptx");
+            List<List<string>> FileContent = GetContentFromPPTX("ines.pptx");
             StringBuilder sb = new StringBuilder();
 
             for (int i = 0; i < FileContent.Count; i++)

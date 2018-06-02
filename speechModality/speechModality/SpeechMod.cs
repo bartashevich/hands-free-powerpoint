@@ -76,7 +76,7 @@ namespace speechModality
             mmic.Send(exNot);*/
 
             // introduce assistant
-            // Speak("Olá, eu sou a Maria, a tua assistente pessoal. Tenho todo o gosto em ajudar-te com algumas tarefas no teu computador. Podes saber mais sobre mim dizendo: ajuda. Sou um pouco distraída, por isso sempre que quiseres chamar por mim diz: ó Maria!");
+            //Speak("Olá, eu sou a Maria, a tua assistente pessoal. Tenho todo o gosto em ajudar-te com algumas tarefas no teu computador. Podes saber mais sobre mim dizendo: ajuda. Sou um pouco distraída, por isso sempre que quiseres chamar por mim diz: ó Maria!");
         }
 
         private void Sre_SpeechHypothesized(object sender, SpeechHypothesizedEventArgs e)

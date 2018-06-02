@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Microsoft.Samples.Kinect.DiscreteGestureBasics"
         Title="gestureModality"
-        Height="250" Width="250"
+        Height="292" Width="313"
         Closing="MainWindow_Closing">
     <Grid>
         <Ellipse x:Name="circle" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="223,4,0,0"></Ellipse>
@@ -45,11 +45,6 @@
             VerticalAlignment="Top"
             Width="51"
             Click="button_left" Margin="70,44,0,0" Height="20"/>
-        <Button Content="CLAP"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Width="51"
-            Click="button_clap" Margin="135,19,0,0" Height="20"/>
         <Button Content="NEXT SLIDE"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -60,5 +55,60 @@
             VerticalAlignment="Top"
             Width="77"
             Click="button_prev_slide" Margin="70,99,0,0" Height="20"/>
+        <Button Content="OPEN HELP"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="103"
+            Click="button_open_help" Margin="135,19,0,0" Height="20"/>
+        <Button Content="C VOL 90"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="77"
+            Click="button_v_90" Margin="70,124,0,0" Height="20"/>
+        <Button Content="C VOL 50"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="77"
+            Click="button_v_50" Margin="70,149,0,0" Height="20"/>
+        <Button Content="C VOL 10"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="77"
+            Click="button_v_10" Margin="70,174,0,0" Height="20"/>
+        <Button Content="MOUSE CONTROL"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="114"
+            Click="button_clap" Margin="160,75,0,0" Height="20"/>
+        <Button Content="MOUSE PAUSE"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="96"
+            Click="button_clap" Margin="160,101,0,0" Height="20"/>
+        <Button Content="MOUSE PEN"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="96"
+            Click="button_pen" Margin="160,127,0,0" Height="20"/>
+        <Button Content="V ON"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="51"
+            Click="button_v_on" Margin="5,154,0,0" Height="20"/>
+        <Button Content="V ACK"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="51"
+            Click="button_v_ack" Margin="5,179,0,0" Height="20"/>
+        <Button Content="V OFF"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="51"
+            Click="button_v_off" Margin="5,204,0,0" Height="20"/>
+        <Button Content="CLOSE HELP"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="103"
+            Click="button_close_help" Margin="135,43,0,0" Height="20"/>
     </Grid>
 </Window>

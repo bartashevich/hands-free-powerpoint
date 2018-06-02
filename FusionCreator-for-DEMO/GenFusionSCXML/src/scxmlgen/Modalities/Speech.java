@@ -8,9 +8,9 @@ import scxmlgen.interfaces.IModality;
 
 public enum Speech implements IModality{  
 
-	SQUARE("[shape][SQUARE]",1500),
+	/*SQUARE("[shape][SQUARE]",1500),
         TRIANGLE("[shape][TRIANGLE]",1500),
-        CIRCLE("[shape][CIRCLE]",1500),
+        CIRCLE("[shape][CIRCLE]",1500),*/
         
         // STATUS
         ASSISTANT_ACTIVE("[status][ASSISTANT_ACTIVE]",1500),
@@ -21,6 +21,13 @@ public enum Speech implements IModality{
         PREV_SLIDE("[action][PREV_SLIDE]",1500),
         CHANGE("[action][CHANGE]",1500),
         COMBO_CHANGE("[combo][CHANGE]",0),
+        
+        SUSPEND("[action][SUSPEND]",1500),
+        CALCULATOR("[action][CALCULATOR]",1500),
+        READ_SLIDE("[action][READ_SLIDE]",1500),
+        READ_NEXT("[action][READ_NEXT]",1500),
+        OPEN_HELP("[action][OPEN_HELP]",1500),
+        CLOSE_HELP("[action][CLOSE_HELP]",1500),
         
         ;
 

@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppGui", "AppGui\AppGui.csproj", "{755A2ED4-51FA-4A53-939D-846679552C9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SavePPTXtoText", "SavePPTXtoText\SavePPTXtoText.csproj", "{710BDADF-70C9-4BC5-825F-935E7F15471B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeakModule", "SpeakModule\SpeakModule.csproj", "{6F34DB37-5C28-4B49-890B-349C082688AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +19,19 @@ Global
 		{755A2ED4-51FA-4A53-939D-846679552C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{755A2ED4-51FA-4A53-939D-846679552C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{755A2ED4-51FA-4A53-939D-846679552C9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{710BDADF-70C9-4BC5-825F-935E7F15471B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{710BDADF-70C9-4BC5-825F-935E7F15471B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{710BDADF-70C9-4BC5-825F-935E7F15471B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{710BDADF-70C9-4BC5-825F-935E7F15471B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F34DB37-5C28-4B49-890B-349C082688AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F34DB37-5C28-4B49-890B-349C082688AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F34DB37-5C28-4B49-890B-349C082688AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F34DB37-5C28-4B49-890B-349C082688AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A058B2BE-D5E5-4EFE-B473-8E1B3C03D9A7}
 	EndGlobalSection
 EndGlobal

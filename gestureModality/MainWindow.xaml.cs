@@ -86,6 +86,60 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             Console.WriteLine("Test MOUSE_INACTIVE");
         }
 
+        private void button_v_on(object sender, RoutedEventArgs e)
+        {
+            SendCommand("status\",\"VOLUME_ACTIVE");
+            Console.WriteLine("Test VOLUME_ACTIVE");
+        }
+
+        private void button_v_ack(object sender, RoutedEventArgs e)
+        {
+            SendCommand("status\",\"VOLUME_ACTIVATING");
+            Console.WriteLine("Test VOLUME_ACTIVATING");
+        }
+
+        private void button_v_off(object sender, RoutedEventArgs e)
+        {
+            SendCommand("status\",\"VOLUME_INACTIVE");
+            Console.WriteLine("Test VOLUME_INACTIVE");
+        }
+
+        private void button_v_90(object sender, RoutedEventArgs e)
+        {
+            SendCommand("volume\",\"90");
+            Console.WriteLine("Test vol 90");
+        }
+
+        private void button_v_50(object sender, RoutedEventArgs e)
+        {
+            SendCommand("volume\",\"50");
+            Console.WriteLine("Test vol 50");
+        }
+
+        private void button_v_10(object sender, RoutedEventArgs e)
+        {
+            SendCommand("volume\",\"10");
+            Console.WriteLine("Test vol 10");
+        }
+
+        private void button_pen(object sender, RoutedEventArgs e)
+        {
+            SendCommand("action\",\"PEN");
+            Console.WriteLine("Test PEN");
+        }
+
+        private void button_open_help(object sender, RoutedEventArgs e)
+        {
+            SendCommand("action\",\"OPEN_HELP");
+            Console.WriteLine("Test OPEN_HELP");
+        }
+
+        private void button_close_help(object sender, RoutedEventArgs e)
+        {
+            SendCommand("action\",\"CLOSE_HELP");
+            Console.WriteLine("Test CLOSE_HELP");
+        }
+
         private void button_right(object sender, RoutedEventArgs e)
         {
             SendCommand("combo\",\"RIGHT");

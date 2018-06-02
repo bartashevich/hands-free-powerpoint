@@ -76,5 +76,41 @@ namespace speechModality
             _sm.SendCommand("action\",\"CHANGE");
             Console.WriteLine("Test CHANGE");
         }
+
+        private void button_suspend(object sender, RoutedEventArgs e)
+        {
+            _sm.SendCommand("action\",\"SUSPEND_ACT");
+            Console.WriteLine("Test SUSPEND_ACT");
+        }
+
+        private void button_calculator(object sender, RoutedEventArgs e)
+        {
+            _sm.SendCommand("action\",\"CALCULATOR");
+            Console.WriteLine("Test CALCULATOR");
+        }
+
+        private void button_open_help(object sender, RoutedEventArgs e)
+        {
+            _sm.SendCommand("action\",\"OPEN_HELP");
+            Console.WriteLine("Test OPEN_HELP");
+        }
+
+        private void button_close_help(object sender, RoutedEventArgs e)
+        {
+            _sm.SendCommand("action\",\"CLOSE_HELP");
+            Console.WriteLine("Test CLOSE_HELP");
+        }
+
+        private void button_read_slide(object sender, RoutedEventArgs e)
+        {
+            _sm.SendCommand("action\",\"READ_SLIDE");
+            Console.WriteLine("Test READ_SLIDE");
+        }
+
+        private void button_read_next(object sender, RoutedEventArgs e)
+        {
+            _sm.SendCommand("action\",\"READ_NEXT");
+            Console.WriteLine("Test READ_NEXT");
+        }
     }
 }

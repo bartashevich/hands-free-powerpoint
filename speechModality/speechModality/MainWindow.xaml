@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:speechModality"
         mc:Ignorable="d"
-        Title="Maria" Height="190" Width="300">
+        Title="Maria" Height="190" Width="416.667">
     <Grid>
         <Button Content="A ON"
             HorizontalAlignment="Left"
@@ -35,6 +35,84 @@
             VerticalAlignment="Top"
             Width="67"
             Click="button_change" Margin="171,10,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+        <Button Content="TIME"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="67"
+            Click="button_change" Margin="171,38,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+        <Button Content="SUSPEND"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="67"
+            Click="button_change" Margin="171,66,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+        <Grid>
+            <Button Content="A ON"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="42"
+                Click="button_a_on" Margin="10,10,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+            <Ellipse x:Name="circle1" Width="50" Height="50" VerticalAlignment="Top" Fill="Gray" Margin="20"/>
+            <TextBox x:Name="maria1" HorizontalAlignment="Center" Height="20" Margin="20,90,20,0" TextAlignment="Center" TextWrapping="Wrap" Text="Diz 'Oh Maria' para ativar." VerticalAlignment="Top" Width="250" FontSize="14" BorderThickness="0" IsReadOnly="True"/>
+            <TextBox x:Name="help1" HorizontalAlignment="Center" Height="20" Margin="20,115,20,0" TextAlignment="Center" TextWrapping="Wrap" Text="Pede ajuda dizendo 'Preciso de Ajuda'." VerticalAlignment="Top" Width="250" FontSize="14" BorderThickness="0" IsReadOnly="True"/>
+            <Button Content="A OFF"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="42"
+                Click="button_a_off" Margin="10,35,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+            <Button Content="NEXT SLIDE"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="101"
+                Click="button_next_slide" Margin="59,10,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+            <Button Content="PREV SLIDE"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="101"
+                Click="button_prev_slide" Margin="59,35,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+            <Button Content="CHANGE"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="67"
+                Click="button_change" Margin="171,10,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+            <Button Content="TIME"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="67"
+                Click="button_change" Margin="171,38,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+            <Button Content="SUSPEND"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="67"
+                Click="button_suspend" Margin="171,66,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+            <Button Content="CALCULE"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="67"
+                Click="button_calculator" Margin="248,10,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+            <Button Content="READ"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="67"
+                Click="button_read_slide" Margin="248,38,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+            <Button Content="CONT READ"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="67"
+                Click="button_read_next" Margin="248,66,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+            <Button Content="OPEN HELP"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="101"
+                Click="button_open_help" Margin="59,66,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+            <Button Content="CLOSE HELP"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="101"
+                Click="button_close_help" Margin="59,94,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+            <!--<TextBox x:Name="result" HorizontalAlignment="Left" Height="40" Margin="20,90,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="380" FontSize="20" IsReadOnly="True" />-->
+            <!--<TextBox x:Name="confidence" HorizontalAlignment="Left" Height="40" Margin="10,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="449" FontSize="20" />-->
+
+        </Grid>
         <!--<TextBox x:Name="result" HorizontalAlignment="Left" Height="40" Margin="20,90,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="380" FontSize="20" IsReadOnly="True" />-->
         <!--<TextBox x:Name="confidence" HorizontalAlignment="Left" Height="40" Margin="10,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="449" FontSize="20" />-->
 

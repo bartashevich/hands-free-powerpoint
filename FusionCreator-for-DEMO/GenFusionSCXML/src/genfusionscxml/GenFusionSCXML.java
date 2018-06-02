@@ -44,12 +44,14 @@ public class GenFusionSCXML {
     fg.Single(SecondMod.MOUSE_ACTIVATING, Output.MOUSE_ACTIVATING);
     fg.Single(SecondMod.MOUSE_INACTIVE, Output.MOUSE_INACTIVE);
     
+    // VOLUME STATUS
+    fg.Single(SecondMod.VOLUME_ACTIVE, Output.VOLUME_ACTIVE);
+    fg.Single(SecondMod.VOLUME_ACTIVATING, Output.VOLUME_ACTIVATING);
+    fg.Single(SecondMod.VOLUME_INACTIVE, Output.VOLUME_INACTIVE);
+    
     // ASSISTANT STATUS
     fg.Single(Speech.ASSISTANT_ACTIVE, Output.ASSISTANT_ACTIVE);
     fg.Single(Speech.ASSISTANT_INACTIVE, Output.ASSISTANT_INACTIVE);
-    
-    // SLIDE CONTROL (CLAP)
-    fg.Single(SecondMod.CLAP, Output.CLAP);
     
     // COMPLEMENTARY SLIDE CONTROL
     fg.Complementary(Speech.CHANGE, SecondMod.LEFT, Output.PREV_SLIDE);
@@ -58,11 +60,19 @@ public class GenFusionSCXML {
     // REDUNDANT SLIDE CONTROL
     fg.Redundancy(Speech.PREV_SLIDE, SecondMod.PREV_SLIDE, Output.PREV_SLIDE);
     fg.Redundancy(Speech.NEXT_SLIDE, SecondMod.NEXT_SLIDE, Output.NEXT_SLIDE);
+    fg.Redundancy(Speech.OPEN_HELP, SecondMod.OPEN_HELP, Output.OPEN_HELP);
+    fg.Redundancy(Speech.CLOSE_HELP, SecondMod.CLOSE_HELP, Output.CLOSE_HELP);
     
     // COMBO OUTPUT
     fg.Single(SecondMod.COMBO_LEFT, Output.COMBO_LEFT);
     fg.Single(SecondMod.COMBO_RIGHT, Output.COMBO_RIGHT);
     fg.Single(Speech.COMBO_CHANGE, Output.COMBO_CHANGE);
+    
+    fg.Single(Speech.SUSPEND, Output.SUSPEND);
+    fg.Single(Speech.CALCULATOR, Output.CALCULATOR);
+    fg.Single(Speech.READ_SLIDE, Output.READ_SLIDE);
+    fg.Single(Speech.READ_NEXT, Output.READ_NEXT);
+    fg.Single(Speech.READ_SLIDE, Output.READ_SLIDE);
     
     fg.Build("fusion.scxml");
         

@@ -8,9 +8,9 @@ import scxmlgen.interfaces.IModality;
  */
 public enum SecondMod implements IModality{
 
-    RED("[color][RED]",1500),
+    /*RED("[color][RED]",1500),
     BLUE("[color][BLUE]",1500),
-    YELLOW("[color][YELLOW]",1500),
+    YELLOW("[color][YELLOW]",1500),*/
     
     // STATUS
     KINECT_ACTIVE("[status][KINECT_ACTIVE]",1500),
@@ -18,15 +18,20 @@ public enum SecondMod implements IModality{
     MOUSE_ACTIVE("[status][MOUSE_ACTIVE]",1500),
     MOUSE_ACTIVATING("[status][MOUSE_ACTIVATING]",1500),
     MOUSE_INACTIVE("[status][MOUSE_INACTIVE]",1500),
+    VOLUME_ACTIVE("[status][VOLUME_ACTIVE]",1500),
+    VOLUME_ACTIVATING("[status][VOLUME_ACTIVATING]",1500),
+    VOLUME_INACTIVE("[status][VOLUME_INACTIVE]",1500),
     
     // SLIDE CONTROL
     RIGHT("[action][RIGHT]",1500),
     LEFT("[action][LEFT]",1500),
     NEXT_SLIDE("[action][NEXT_SLIDE]",1500),
     PREV_SLIDE("[action][PREV_SLIDE]",1500),
-    CLAP("[action][CLAP]",1500),
     COMBO_LEFT("[combo][LEFT]",0),
     COMBO_RIGHT("[combo][RIGHT]",0),
+    OPEN_HELP("[action][OPEN_HELP]",1500),
+    CLOSE_HELP("[action][CLOSE_HELP]",1500),
+    PEN("[action][PEN]",1500),
     
     ;
     
