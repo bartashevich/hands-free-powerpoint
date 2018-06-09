@@ -79,8 +79,8 @@ namespace speechModality
 
         private void button_suspend(object sender, RoutedEventArgs e)
         {
-            _sm.SendCommand("action\",\"SUSPEND_ACT");
-            Console.WriteLine("Test SUSPEND_ACT");
+            _sm.SendCommand("action\",\"SUSPEND");
+            Console.WriteLine("Test SUSPEND");
         }
 
         private void button_calculator(object sender, RoutedEventArgs e)

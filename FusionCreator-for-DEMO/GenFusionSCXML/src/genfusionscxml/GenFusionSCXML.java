@@ -72,7 +72,6 @@ public class GenFusionSCXML {
     fg.Single(Speech.CALCULATOR, Output.CALCULATOR);
     fg.Single(Speech.READ_SLIDE, Output.READ_SLIDE);
     fg.Single(Speech.READ_NEXT, Output.READ_NEXT);
-    fg.Single(Speech.READ_SLIDE, Output.READ_SLIDE);
     
     fg.Build("fusion.scxml");
         

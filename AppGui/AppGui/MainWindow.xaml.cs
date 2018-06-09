@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
@@ -27,12 +28,19 @@ namespace AppGui
         private Timer comboTimer;
         private string comboString;
 
+        private double maxWindowWidth = 600;
+        private double medWindowWidth = 200;
+        private double minWindowWidth = 30;
+        private double screenWidth;
+        private double screenHeight;
+
         private string pptx_location = null;
         List<List<string>> FileContent = null;
         private int pptx_size = 0;
         private int pptx_current_index = 0;
         private int pptx_current_block = 0;
 
+        private HelpWindow window = null;
 
         private Speaking sm;
 
@@ -42,6 +50,18 @@ namespace AppGui
 
             this.main = this;
 
+            this.screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            this.screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+
+            this.Height = 60;
+            this.Width = 600;
+
+            this.Top = screenHeight - this.Height + 7;
+            this.Left = screenWidth - this.Width + 7;
+
+            this.Topmost = true;
+            this.Show();
+
             this.sm = new Speaking();
 
             mmiC = new MmiCommunication("localhost",8000, "User1", "GUI");
@@ -49,6 +69,37 @@ namespace AppGui
             mmiC.Start();
 
             //UpdateKinectStatus("active");
+        }
+
+        void Button_Open_HelpWindow(object sender, RoutedEventArgs e)
+        {
+            Open_HelpWindow();
+        }
+
+        void Open_HelpWindow()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                if (window != null)
+                {
+                    Close_HelpWindow();
+                }
+
+                window = new HelpWindow();
+                window.Show();
+            });
+        }
+
+        void Close_HelpWindow()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                if (window != null)
+                {
+                    window.Close();
+                    window = null;
+                }
+            });
         }
 
         // upload file box
@@ -65,6 +116,20 @@ namespace AppGui
 
                 sm.Speak("O ficheiro contem " + pptx_size + " diapositivos");
             }
+        }
+
+        // remove special characters
+        private string RemoveSpecialCharacters(string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in str)
+            {
+                if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_' || c == ' ')
+                {
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString();
         }
 
         // function to read slides
@@ -108,7 +173,7 @@ namespace AppGui
 
             try
             {
-                sm.Speak(to_read);
+                sm.Speak((to_read));
             }
             catch (Exception)
             {
@@ -203,6 +268,15 @@ namespace AppGui
                         pptx_current_block = 0;
                         InternalFuncions.PowerPointControl("previous", 0);
                     }
+                    break;
+                case "OPEN_HELP":
+                    Open_HelpWindow();
+                    break;
+                case "CLOSE_HELP":
+                    Close_HelpWindow();
+                    break;
+                case "CALCULATOR":
+                    InternalFuncions.OpenProgram("calc.exe");
                     break;
             }
         }
@@ -314,6 +388,7 @@ namespace AppGui
                 case "volume":
                     secondCommand = (string)json.recognized[1].ToString();
                     UpdateAction("volume " + secondCommand + "%");
+                    UpdateVolume(secondCommand);
                     Console.WriteLine(secondCommand);
                     break;
                 case "combo":
@@ -368,6 +443,35 @@ namespace AppGui
                     InternalFuncions.MoviePausePlay();
                     break;*/
             }
+        }
+
+        private void UpdateVolume(string secondCommand)
+        {
+            int volume = Int32.Parse(secondCommand) * 65000 / 100;
+
+            InternalFuncions.VolumeControl("set", volume);
+        }
+
+        private void Button_Minimize_Window(object sender, RoutedEventArgs e)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                if (this.Width >= this.maxWindowWidth)
+                {
+                    this.main.Width = this.medWindowWidth;
+                    this.Left = this.screenWidth - this.Width + 7;
+                }
+                else if (this.Width >= this.medWindowWidth)
+                {
+                    this.Width = this.minWindowWidth;
+                    this.Left = this.screenWidth - this.Width + 7;
+                }
+                else
+                {
+                    this.main.Width = this.maxWindowWidth;
+                    this.Left = this.screenWidth - this.Width + 7;
+                }
+            });
         }
     }
 }

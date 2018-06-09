@@ -31,9 +31,6 @@
 				<ruleref uri="#power"/>
 			</item>
 			<item>
-				<ruleref uri="#movie"/>
-			</item>
-			<item>
 				<ruleref uri="#time"/>
 			</item>
 		</one-of>
@@ -46,15 +43,24 @@
 	</rule>
 
 	<rule id="help">
-		<item>
-			<one-of>
-				<item>Preciso de ajuda</item>
-				<item>Ajuda</item>
-				<item>O que sabes fazer?</item>
-				<item>Que coisas te posso dizer?</item>
-			</one-of>
-			<tag>out.action="HELP"</tag>
-		</item>
+		<one-of>
+			<item>
+				<one-of>
+          <item>preciso de ajuda</item>
+					<item>abrir ajuda</item>
+					<item>abre ajuda</item>
+					<item>ajuda</item>
+				</one-of>
+				<tag>out.action="OPEN_HELP"</tag>
+			</item>
+			<item>
+				<one-of>
+					<item>fechar ajuda</item>
+					<item>fecha ajuda</item>
+				</one-of>
+				<tag>out.action="CLOSE_HELP"</tag>
+			</item>
+		</one-of>
 	</rule>
 	
 	<rule id="confirmation">
@@ -246,7 +252,7 @@
 				</item>
 				<item>abre a calculadora</item>
 			</one-of>
-			<tag>out.action="OPEN_CALCULATOR"</tag>
+			<tag>out.action="CALCULATOR"</tag>
 		</item>
 	</rule>
 	
@@ -292,7 +298,31 @@
 						</one-of>
 					</item>
 				</one-of>
-				<tag>out.action="PREVIOUS_SLIDE"</tag>
+				<tag>out.action="PREV_SLIDE"</tag>
+			</item>
+      <item>
+				<one-of>
+					<item>mudar o slide</item>
+					<item>mudar</item>
+          <item>muda o slide</item>
+				</one-of>
+				<tag>out.action="CHANGE_SLIDE"</tag>
+			</item>
+      <item>
+				<one-of>
+					<item>ler o slide</item>
+          <item>le o slide</item>
+					<item>ler</item>
+				</one-of>
+				<tag>out.action="READ_SLIDE"</tag>
+			</item>
+      <item>
+				<one-of>
+					<item>continua</item>
+					<item>continua a ler</item>
+          <item>ler o proximo</item>
+				</one-of>
+				<tag>out.action="READ_NEXT"</tag>
 			</item>
 		</one-of>
 	</rule>
@@ -318,28 +348,6 @@
 				</item>		
 			</one-of>
 		</item>
-	</rule>
-
-	<rule id="movie">
-		<one-of>
-			<item>
-				<one-of>
-					<item>pausa o filme</item>
-					<item>pausa a música</item>
-					<item>pausa</item>
-				</one-of>
-				<tag>out.action="PAUSE"</tag>
-			</item>
-			<item>
-				<one-of>
-					<item>retoma o filme</item>
-					<item>retoma a música</item>
-					<item>retoma</item>
-					<item>continua</item>
-				</one-of>
-				<tag>out.action="PLAY"</tag>
-			</item>
-		</one-of>
 	</rule>
 
 	<rule id="time">

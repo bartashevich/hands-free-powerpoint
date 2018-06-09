@@ -89,6 +89,7 @@ namespace speechModality
         {
             Console.WriteLine("Assistant deactivated.");
             assistantActive = false;
+            SendCommand("status\",\"ASSISTANT_INACTIVE");
 
             // update GUI
             onRecognized(new SpeechEventArg());
@@ -151,6 +152,8 @@ namespace speechModality
 
             assistantActive = true;
             Console.WriteLine("Assistant activated.");
+
+            SendCommand("status\",\"ASSISTANT_ACTIVE");
 
             onRecognized(new SpeechEventArg() { AssistantActive = assistantActive });
 
@@ -297,7 +300,7 @@ namespace speechModality
                 // voice feedback for commands
                 switch (e.Result.Semantics["action"].Value.ToString())
                 {
-                    case "OPEN_EMAIL":
+                    /*case "OPEN_EMAIL":
                         if (e.Result.Semantics["action"].Value.ToString() == "OPEN_EMAIL")
                         {
                             if (e.Result.Semantics.ContainsKey("person") && e.Result.Semantics["person"].Value.ToString() == "ASSISTANT")
@@ -328,7 +331,7 @@ namespace speechModality
                         {
                             Speak("Esta é a previsão do tempo para amanhã.");
                         }
-                        break;
+                        break;*/
                     case "OPEN_CALCULATOR":
                         Speak("Matemática nunca foi o meu forte. Importas-te de ser tu a escrever?");
                         break;
@@ -436,7 +439,7 @@ namespace speechModality
                             speakTime += " " + text[text.Length - 2] + " " + text[text.Length - 1];
                         }
 
-                        Console.WriteLine(speakTime);
+                        SendCommand("action\",\"TIME");
                         Speak(speakTime);
 
                         return;
@@ -445,10 +448,10 @@ namespace speechModality
                 semanticValue = e.Result.Semantics;
             }
 
-            if (semanticValue["action"].Value.ToString() == "OPEN_EMAIL")
+            /*if (semanticValue["action"].Value.ToString() == "OPEN_EMAIL")
             {
                 emailsOpened++;
-            }
+            }*/
 
             // if a command was recognized and the confirmation of a previous command was ignored by the user, disable it
             pendingSemantic = null;
@@ -459,10 +462,49 @@ namespace speechModality
                 return;
             }
 
-            
+            // send command
+            foreach (var resultSemantic in semanticValue)
+            {
+                Console.WriteLine(resultSemantic.Value.Value.ToString());
+
+                switch (resultSemantic.Value.Value.ToString())
+                {
+                    case "NEXT_SLIDE":
+                        SendCommand("action\",\"NEXT_SLIDE");
+                        break;
+                    case "PREV_SLIDE":
+                        SendCommand("action\",\"PREV_SLIDE");
+                        break;
+                    case "CHANGE_SLIDE":
+                        SendCommand("combo\",\"CHANGE");
+                        System.Threading.Thread.Sleep(1000);
+                        SendCommand("action\",\"CHANGE");
+                        break;
+                    case "SUSPEND":
+                        SendCommand("action\",\"SUSPEND");
+                        break;
+                    case "CALCULATOR":
+                        SendCommand("action\",\"CALCULATOR");
+                        break;
+                    case "OPEN_HELP":
+                        SendCommand("action\",\"OPEN_HELP");
+                        break;
+                    case "CLOSE_HELP":
+                        SendCommand("action\",\"CLOSE_HELP");
+                        break;
+                    case "READ_SLIDE":
+                        SendCommand("action\",\"READ_SLIDE");
+                        break;
+                    case "READ_NEXT":
+                        SendCommand("action\",\"READ_NEXT");
+                        break;
+                }
+                break;
+            }
+
             // send command
             // format {"recognized":["SHAPE","COLOR"]}
-            string json = "{ \"recognized\": [";
+            /*string json = "{ \"action\": [";
             foreach (var resultSemantic in semanticValue)
             {
                 json+= "\"" + resultSemantic.Value.Value +"\", ";
@@ -472,9 +514,9 @@ namespace speechModality
 
             Console.WriteLine(json);
             var exNot = lce.ExtensionNotification(e.Result.Audio.StartTime+"", e.Result.Audio.StartTime.Add(e.Result.Audio.Duration)+"",e.Result.Confidence, json);
-            mmic.Send(exNot);
+            mmic.Send(exNot);*/
 
-            
+
         }
 
         public void SendCommand(string command)
