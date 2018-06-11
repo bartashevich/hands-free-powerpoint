@@ -27,22 +27,6 @@ namespace speechModality
             InitializeComponent();
 
             _sm = new SpeechMod();
-            _sm.Recognized += _sm_Recognized;
-        }
-
-        private void _sm_Recognized(object sender, SpeechEventArg e)
-        {
-            // result.Text = e.Text;
-            // confidence.Text = e.Confidence+"";
-
-            // if (e.Final) result.FontWeight = FontWeights.Bold;
-            // else result.FontWeight = FontWeights.Normal;
-
-            this.Dispatcher.Invoke(() =>
-            {
-                if (e.AssistantActive) circle.Fill = Brushes.Green;
-                else circle.Fill = Brushes.Gray;
-            });
         }
 
         private void button_a_on(object sender, RoutedEventArgs e)
@@ -111,6 +95,12 @@ namespace speechModality
         {
             _sm.SendCommand("action\",\"READ_NEXT");
             Console.WriteLine("Test READ_NEXT");
+        }
+
+        private void button_time(object sender, RoutedEventArgs e)
+        {
+            _sm.SendCommand("action\",\"TIME");
+            Console.WriteLine("Test TIME");
         }
     }
 }

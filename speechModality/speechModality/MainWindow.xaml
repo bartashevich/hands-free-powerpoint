@@ -12,9 +12,6 @@
             VerticalAlignment="Top"
             Width="42"
             Click="button_a_on" Margin="10,10,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
-        <Ellipse x:Name="circle" Width="50" Height="50" VerticalAlignment="Top" Fill="Gray" Margin="20"></Ellipse>
-        <TextBox x:Name="maria" HorizontalAlignment="Center" Height="20" Margin="20,90,20,0" TextAlignment="Center" TextWrapping="Wrap" Text="Diz 'Oh Maria' para ativar." VerticalAlignment="Top" Width="250" FontSize="14" BorderThickness="0" IsReadOnly="True"/>
-        <TextBox x:Name="help" HorizontalAlignment="Center" Height="20" Margin="20,115,20,0" TextAlignment="Center" TextWrapping="Wrap" Text="Pede ajuda dizendo 'Preciso de Ajuda'." VerticalAlignment="Top" Width="250" FontSize="14" BorderThickness="0" IsReadOnly="True"/>
         <Button Content="A OFF"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -51,9 +48,6 @@
                 VerticalAlignment="Top"
                 Width="42"
                 Click="button_a_on" Margin="10,10,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
-            <Ellipse x:Name="circle1" Width="50" Height="50" VerticalAlignment="Top" Fill="Gray" Margin="20"/>
-            <TextBox x:Name="maria1" HorizontalAlignment="Center" Height="20" Margin="20,90,20,0" TextAlignment="Center" TextWrapping="Wrap" Text="Diz 'Oh Maria' para ativar." VerticalAlignment="Top" Width="250" FontSize="14" BorderThickness="0" IsReadOnly="True"/>
-            <TextBox x:Name="help1" HorizontalAlignment="Center" Height="20" Margin="20,115,20,0" TextAlignment="Center" TextWrapping="Wrap" Text="Pede ajuda dizendo 'Preciso de Ajuda'." VerticalAlignment="Top" Width="250" FontSize="14" BorderThickness="0" IsReadOnly="True"/>
             <Button Content="A OFF"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
@@ -78,7 +72,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Width="67"
-                Click="button_change" Margin="171,38,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
+                Click="button_time" Margin="171,38,0,0" Height="20" RenderTransformOrigin="1.508,-1.046"/>
             <Button Content="SUSPEND"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"

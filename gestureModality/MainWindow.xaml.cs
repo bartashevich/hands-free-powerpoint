@@ -47,7 +47,11 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         private void OnActiveEnded(Object source, ElapsedEventArgs e)
         {
             Console.WriteLine("Kinect stopped receving.");
-            main.SetState("deactive");
+            if (this.KinectStatus)
+            {
+                SendCommand("status\",\"KINECT_INACTIVE");
+                this.KinectStatus = false;
+            }
         }
 
         private void Button_Help(object sender, RoutedEventArgs e)
@@ -106,7 +110,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
         private void button_v_90(object sender, RoutedEventArgs e)
         {
-            SendCommand("volume\",\"90");
+            SendCommand("volume\",\"UP");
             Console.WriteLine("Test vol 90");
         }
 
@@ -118,7 +122,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
         private void button_v_10(object sender, RoutedEventArgs e)
         {
-            SendCommand("volume\",\"10");
+            SendCommand("volume\",\"DOWN");
             Console.WriteLine("Test vol 10");
         }
 
@@ -143,7 +147,6 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         private void button_right(object sender, RoutedEventArgs e)
         {
             SendCommand("combo\",\"RIGHT");
-            System.Threading.Thread.Sleep(1000);
             SendCommand("action\",\"RIGHT");
             Console.WriteLine("Test RIGHT");
         }
@@ -151,7 +154,6 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         private void button_left(object sender, RoutedEventArgs e)
         {
             SendCommand("combo\",\"LEFT");
-            System.Threading.Thread.Sleep(1000);
             SendCommand("action\",\"LEFT");
             Console.WriteLine("Test LEFT");
         }
@@ -179,6 +181,11 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             // GUI status update
             SetGUIMouseState("active");
 
+            if(mouseState != "active")
+            {
+                SendCommand("status\",\"MOUSE_ACTIVE");
+            }
+
             mouseTimer.Stop();
             mouseTimer = null;
             mouseState = "active";
@@ -193,12 +200,18 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             // GUI status update
             SetGUIMouseState("inactive");
 
+            if (mouseState != "inactive")
+            {
+                SendCommand("status\",\"MOUSE_INACTIVE");
+            }
+
             mouseTimer.Stop();
             mouseTimer = null;
             mouseState = "inactive";
             Console.WriteLine(mouseState);
 
             // disable pointer
+            System.Threading.Thread.Sleep(500);
             ActivatePointer("deactivate");
 
             // remote person from mouse
@@ -222,6 +235,18 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             {
                 confidence_percentage.Content = "Max confidence: 0.00 %";
             });
+        }
+
+        private void ActivateVolumeControl(Object source, ElapsedEventArgs e)
+        {
+            activeVolumeChange = true;
+            currentVolumePos = 0;
+            SendCommand("status\",\"VOLUME_ACTIVE");
+        }
+
+        private void SetHelpWindow(Object source, ElapsedEventArgs e)
+        {
+            SendCommand("action\",\"OPEN_HELP");
         }
 
         public void SetGUIMouseState(string state)
@@ -253,6 +278,11 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                 switch (state)
                 {
                     case "active":
+                        if (!this.KinectStatus)
+                        {
+                            SendCommand("status\",\"KINECT_ACTIVE");
+                            this.KinectStatus = !this.KinectStatus;
+                        }
                         // show to the user that kinect is active
                         circle.Fill = Brushes.Green;
 
@@ -286,31 +316,31 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                 case "pointer":
                     if(pointerType != "pointer")
                     {
-                        SendCommand("LASER_POINTER");
+                        SendCommand("action\",\"LASER_POINTER");
                         pointerType = "pointer";
                     }
                     break;
                 case "pen":
                     if (pointerType != "pen")
                     {
-                        SendCommand("LASER_PEN");
+                        SendCommand("action\",\"LASER_PEN");
                         pointerType = "pen";
                     }
                     else
                     {
-                        SendCommand("LASER_POINTER");
+                        SendCommand("action\",\"LASER_POINTER");
                         pointerType = "pointer";
                     }
                     break;
                 case "deactivate":
                     if (pointerType == "pointer")
                     {
-                        SendCommand("LASER_POINTER");
+                        SendCommand("action\",\"LASER_POINTER");
                         pointerType = "none";
                     }
                     else if (pointerType == "pen")
                     {
-                        SendCommand("LASER_PEN");
+                        SendCommand("action\",\"LASER_PEN");
                         pointerType = "none";
                     }
                     break;
@@ -334,8 +364,12 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                         // GUI status update
                         SetGUIMouseState("pending");
 
+                        if (mouseState != "activating")
+                        {
+                            SendCommand("status\",\"MOUSE_ACTIVATING");
+                        }
+
                         mouseState = "activating";
-                        Console.WriteLine(mouseState);
                     }
                     break;
                 case "deactivating":
@@ -344,10 +378,14 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                         // GUI status update
                         SetGUIMouseState("inactive");
 
+                        if (mouseState != "inactive")
+                        {
+                            SendCommand("status\",\"MOUSE_INACTIVE");
+                        }
+
                         mouseTimer.Stop();
                         mouseTimer = null;
                         mouseState = "inactive";
-                        Console.WriteLine(mouseState);
                     }
                     break;
                 case "inactive":
@@ -363,13 +401,22 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                         // GUI status update
                         SetGUIMouseState("pending");
 
+                        if (mouseState != "inactivating")
+                        {
+                            SendCommand("status\",\"MOUSE_ACTIVATING");
+                        }
+
                         mouseState = "inactivating";
-                        Console.WriteLine(mouseState);
                     }
                     break;
                 case "continue":
                     // GUI status update
                     SetGUIMouseState("active");
+
+                    if (mouseState != "active")
+                    {
+                        SendCommand("status\",\"MOUSE_ACTIVE");
+                    }
 
                     if (mouseTimer != null)
                     {
@@ -377,7 +424,6 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                     }
                     mouseTimer = null;
                     mouseState = "active";
-                    Console.WriteLine(mouseState);
                     break;
             }
         }
@@ -485,6 +531,9 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         private Timer confidenceTimer;
         private string mouseState = "inactive";
 
+        // help window
+        public bool helpWindowOpen = false;
+        private Timer helpWindowTimer;
 
         //mouse vars
         private Timer mouseTimer;
@@ -493,11 +542,20 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         private bool activateMarker = false;
         private double sholderPosX = 0, sholderPosY = 0;
         private string pointerType = "none";
+        private bool isPenActive = false;
+        private bool canBeClicked = true;
+
+        public bool KinectStatus = false;
 
         private List<MouseCoo> mousePosition = new List<MouseCoo>();
         private List<string> handStatusLog = new List<string>();
         private int mouseActivePerson = 0;
 
+        // volume control
+        public bool activeVolumeChange = false;
+        private double currentVolumePos = 0;
+        public int activationTime = 2;
+        private Timer volumeTimer;
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -795,7 +853,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         /// <param name="e">event arguments</param>
         private void Reader_BodyFrameArrived(object sender, BodyFrameArrivedEventArgs e)
         {
-            main.SetState("active");
+            SetState("active");
 
             bool dataReceived = false;
 
@@ -835,28 +893,110 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                                     }
                                 }
 
-                                // get arm joints
+                                // right shoulder and right wrist
                                 Joint rightShoulder = body.Joints[JointType.ShoulderRight];
-                                //Joint rightElbow = body.Joints[JointType.ElbowRight];
                                 Joint rightWrist = body.Joints[JointType.WristRight];
 
-                                // get joints X positions
                                 double x_shoulder = rightShoulder.Position.X;
-                                //double x_elbow = rightElbow.Position.X;
                                 double x_wrist = rightWrist.Position.X;
-
-                                // get joints Y positions
+                                
                                 double y_shoulder = rightShoulder.Position.Y;
-                                //double y_elbow = rightElbow.Position.Y;
                                 double y_wrist = rightWrist.Position.Y;
-
-                                // get joints Z positions
+                                
                                 double z_shoulder = rightShoulder.Position.Z;
-                                //double z_elbow = rightElbow.Position.Z;
                                 double z_wrist = rightWrist.Position.Z;
 
-                                //Console.WriteLine("Wrist z: {0}", z_wrist);
-                                //Console.WriteLine("Shoulder z: {0}", z_shoulder);
+                                // shoulder and wrist
+                                Joint head = body.Joints[JointType.Head];
+                                Joint leftWrist = body.Joints[JointType.WristLeft];
+
+                                double y_head = head.Position.Y;
+                                double y_LeftWrist = leftWrist.Position.Y;
+
+                                double z_head = head.Position.Z;
+                                double z_LeftWrist = leftWrist.Position.Z;
+
+                                /*Console.WriteLine("Left Wrist y: {0}", y_LeftWrist);
+                                Console.WriteLine("Head y: {0}", y_head);
+                                Console.WriteLine("----");
+                                Console.WriteLine("Left Wrist z: {0}", z_LeftWrist);
+                                Console.WriteLine("Head z: {0}", z_head);*/
+
+                                if (BetweenInterval(y_head, y_LeftWrist, 0.10) && BetweenInterval(z_head, z_LeftWrist, 0.10))
+                                {
+                                    if (volumeTimer == null)
+                                    {
+                                        volumeTimer = new Timer(activationTime * 1000);
+                                        volumeTimer.Elapsed += ActivateVolumeControl;
+                                        volumeTimer.AutoReset = false;
+                                        volumeTimer.Enabled = true;
+                                        SendCommand("status\",\"VOLUME_ACTIVATING");
+                                    }
+                                }
+                                else
+                                {
+                                    if (volumeTimer != null)
+                                    {
+                                        volumeTimer.Stop();
+                                        volumeTimer = null;
+
+                                        activeVolumeChange = false;
+                                        SendCommand("status\",\"VOLUME_INACTIVE");
+                                    }
+                                    else if (activeVolumeChange)
+                                    {
+                                        activeVolumeChange = false;
+                                        SendCommand("status\",\"VOLUME_INACTIVE");
+                                    }
+                                }
+
+                                if (activeVolumeChange)
+                                {
+                                    double volInterval = 0.10;
+
+                                    // save initial wrist position
+                                    if(currentVolumePos == 0)
+                                    {
+                                        currentVolumePos = y_wrist;
+                                    }
+
+                                    if(currentVolumePos + volInterval < y_wrist)
+                                    {
+                                        currentVolumePos = currentVolumePos + volInterval;
+                                        SendCommand("volume\",\"UP");
+                                    }
+                                    else if (currentVolumePos - volInterval > y_wrist)
+                                    {
+                                        currentVolumePos = currentVolumePos - volInterval;
+                                        SendCommand("volume\",\"DOWN");
+                                    }
+                                }
+
+                                if (!activeVolumeChange && (y_LeftWrist >= y_head + 0.2 || y_wrist >= y_head + 0.2))
+                                {
+                                    if (!helpWindowOpen)
+                                    {
+                                        /*helpWindowTimer = new Timer(5 * 1000);
+                                        helpWindowTimer.Elapsed += SetHelpWindow;
+                                        helpWindowTimer.AutoReset = false;
+                                        helpWindowTimer.Enabled = true;*/
+                                        SendCommand("action\",\"OPEN_HELP");
+                                        helpWindowOpen = true;
+                                    }
+                                }
+                                else
+                                {
+                                    if(helpWindowTimer != null)
+                                    {
+                                        helpWindowTimer.Stop();
+                                    }
+
+                                    if (helpWindowOpen)
+                                    {
+                                        SendCommand("action\",\"CLOSE_HELP");
+                                        helpWindowOpen = false;
+                                    }
+                                }
 
                                 double mouseActivationLimit = 0.10;
                                 double mouseActiveLimit = 0.20;
@@ -926,7 +1066,6 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                                         MouseActions("continue");
 
                                         String rightHandState = handSmoothing(body.HandRightState.ToString());
-                                        //Console.WriteLine(rightHandState);
 
                                         double final_wrist_x = -(x_shoulder - mouseActiveLimit) + x_wrist;
                                         double final_wrist_y = -(y_shoulder - mouseActiveLimit) + y_wrist;
@@ -943,15 +1082,30 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
                                             if (rightHandState == "Closed")
                                             {
-                                                activateMarker = false;
-                                                mouseClick = true;
-                                                if(mousePosY == 0)
+                                                if (!isPenActive)
                                                 {
-                                                    mousePosY = mouse_y;
+                                                    if (canBeClicked)
+                                                    {
+                                                        ActivatePointer("deactivate");
+                                                        System.Threading.Thread.Sleep(500);
+                                                        KinectMouseController.KinectMouseMethods.SendMouseInput(mouse_x, mouse_y, 800, 600, true);
+                                                        KinectMouseController.KinectMouseMethods.SendMouseInput(mouse_x, mouse_y, 800, 600, false);
+                                                        canBeClicked = !canBeClicked;
+                                                        ActivatePointer("pointer");
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    mouse_y = mousePosY;
+                                                    activateMarker = false;
+                                                    mouseClick = true;
+                                                    if (mousePosY == 0)
+                                                    {
+                                                        mousePosY = mouse_y;
+                                                    }
+                                                    else
+                                                    {
+                                                        mouse_y = mousePosY;
+                                                    }
                                                 }
                                             }
                                             else if (rightHandState == "Open")
@@ -961,6 +1115,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                                                     mouse_y = mousePosY;
                                                 }
                                                 mouseClick = false;
+                                                canBeClicked = true;
                                                 mousePosY = 0;
                                                 activateMarker = false;
                                             }
@@ -969,6 +1124,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                                                 if (!activateMarker)
                                                 {
                                                     ActivatePointer("pen");
+                                                    isPenActive = !isPenActive;
                                                     activateMarker = true;
                                                 }
                                             }

@@ -255,7 +255,7 @@ namespace AppGui
                     Process.Start("nircmdterm.exe", "mutesysvolume 0");
                     break;
                 case "change":
-                    Process.Start("nircmdterm.exe", "changesysvolume " + quantity);
+                    Process.Start("nircmdterm.exe", "changesysvolume " + 650 * quantity);
                     break;
                 case "set":
                     Process.Start("nircmdterm.exe", "setsysvolume " + quantity);

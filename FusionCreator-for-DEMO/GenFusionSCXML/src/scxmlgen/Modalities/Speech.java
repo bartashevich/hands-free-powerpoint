@@ -13,19 +13,18 @@ public enum Speech implements IModality{
         CIRCLE("[shape][CIRCLE]",1500),*/
         
         // STATUS
-        ASSISTANT_ACTIVE("[status][ASSISTANT_ACTIVE]",1500),
-        ASSISTANT_INACTIVE("[status][ASSISTANT_INACTIVE]",1500),
+        ASSISTANT_ACTIVE("[status][ASSISTANT_ACTIVE]",0),
+        ASSISTANT_INACTIVE("[status][ASSISTANT_INACTIVE]",0),
         
         // SLIDE CONTROL
         NEXT_SLIDE("[action][NEXT_SLIDE]",1500),
         PREV_SLIDE("[action][PREV_SLIDE]",1500),
         CHANGE("[action][CHANGE]",1500),
-        COMBO_CHANGE("[combo][CHANGE]",0),
         
-        SUSPEND("[action][SUSPEND]",1500),
-        CALCULATOR("[action][CALCULATOR]",1500),
-        READ_SLIDE("[action][READ_SLIDE]",1500),
-        READ_NEXT("[action][READ_NEXT]",1500),
+        SUSPEND("[action][SUSPEND]",0),
+        CALCULATOR("[action][CALCULATOR]",0),
+        READ_SLIDE("[action][READ_SLIDE]",0),
+        READ_NEXT("[action][READ_NEXT]",0),
         OPEN_HELP("[action][OPEN_HELP]",1500),
         CLOSE_HELP("[action][CLOSE_HELP]",1500),
         

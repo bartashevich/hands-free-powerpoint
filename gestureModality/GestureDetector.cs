@@ -170,6 +170,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                 if (frame != null)
                 {
                     main.SetState("active");
+                    
                     // get the discrete gesture results which arrived with the latest frame
                     IReadOnlyDictionary<Gesture, DiscreteGestureResult> discreteResults = frame.DiscreteGestureResults;
                     var continuousResults = frame.ContinuousGestureResults;

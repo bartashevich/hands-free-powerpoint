@@ -60,6 +60,7 @@ namespace AppGui
             this.Left = screenWidth - this.Width + 7;
 
             this.Topmost = true;
+
             this.Show();
 
             this.sm = new Speaking();
@@ -86,6 +87,7 @@ namespace AppGui
                 }
 
                 window = new HelpWindow();
+                window.Topmost = true;
                 window.Show();
             });
         }
@@ -278,6 +280,12 @@ namespace AppGui
                 case "CALCULATOR":
                     InternalFuncions.OpenProgram("calc.exe");
                     break;
+                case "LASER_POINTER":
+                    InternalFuncions.PowerPointControl("pointer", 0);
+                    break;
+                case "LASER_PEN":
+                    InternalFuncions.PowerPointControl("pen", 0);
+                    break;
             }
         }
 
@@ -387,7 +395,7 @@ namespace AppGui
                     break;
                 case "volume":
                     secondCommand = (string)json.recognized[1].ToString();
-                    UpdateAction("volume " + secondCommand + "%");
+                    UpdateAction("Volume " + secondCommand);
                     UpdateVolume(secondCommand);
                     Console.WriteLine(secondCommand);
                     break;
@@ -447,9 +455,15 @@ namespace AppGui
 
         private void UpdateVolume(string secondCommand)
         {
-            int volume = Int32.Parse(secondCommand) * 65000 / 100;
-
-            InternalFuncions.VolumeControl("set", volume);
+            if (secondCommand == "UP")
+            {
+                InternalFuncions.VolumeControl("change", 10);
+                Console.WriteLine("VOL UP");
+            }
+            else if (secondCommand == "DOWN")
+            {
+                InternalFuncions.VolumeControl("change", -10);
+            }
         }
 
         private void Button_Minimize_Window(object sender, RoutedEventArgs e)

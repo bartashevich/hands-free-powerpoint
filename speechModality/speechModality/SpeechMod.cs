@@ -25,8 +25,6 @@ namespace speechModality
 
         private SemanticValue pendingSemantic = null;
 
-        private int emailsOpened = 0;
-
         private int round = 0;
 
         protected virtual void onRecognized(SpeechEventArg msg)

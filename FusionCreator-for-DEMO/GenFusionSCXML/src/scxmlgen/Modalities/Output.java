@@ -33,11 +33,6 @@ public enum Output implements IOutput{
     NEXT_SLIDE("[action][NEXT_SLIDE]"),
     PREV_SLIDE("[action][PREV_SLIDE]"),
     
-    // COMBO OUTPUT
-    COMBO_LEFT("[combo][LEFT]"),
-    COMBO_RIGHT("[combo][RIGHT]"),
-    COMBO_CHANGE("[combo][CHANGE]"),
-    
     SUSPEND("[action][SUSPEND]"),
     CALCULATOR("[action][CALCULATOR]"),
     READ_SLIDE("[action][READ_SLIDE]"),

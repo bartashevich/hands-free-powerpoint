@@ -56,6 +56,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         private MainWindow main;
         private float MaxConfidence = 0;
         private Timer MaxConfidenceTimer;
+        private Timer VolumeControlTimer;
 
 
         private bool slide_leftProgress_Left = false;
@@ -63,9 +64,10 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
         Dictionary<string, string[]> gestureDictionary = new Dictionary<string, string[]>()
         {
-            {"clap", new string[] {"Hide","false","HIDE_SLIDE"} },
-            {"slide_leftProgress_Left", new string[] {"Left","false","PREVIOUS_SLIDE"} },
-            {"slide_rightProgress_Right", new string[] {"Right","false","NEXT_SLIDE" } }
+            {"slide_leftProgress_Left", new string[] {"Left","false","PREV_SLIDE"} },
+            {"slide_rightProgress_Right", new string[] {"Right","false","NEXT_SLIDE" } },
+            {"left_arm", new string[] {"Left","false","LEFT" } },
+            {"right_arm", new string[] {"Right","false","RIGHT" } }
         };
         
         
@@ -224,11 +226,18 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
             var exNot = lce.ExtensionNotification("", "", 100, json);
             mmic.Send(exNot);
+            Console.WriteLine(command);
         }
 
         private void ResetMaxConfidence(Object source, ElapsedEventArgs e)
         {
             MaxConfidence = 0;
+        }
+
+        private void EnableVolumeControl(Object source, ElapsedEventArgs e)
+        {
+            main.activeVolumeChange = true;
+            SendCommand("status\",\"VOLUME_ACTIVE");
         }
 
         /// <summary>
@@ -274,15 +283,49 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                             if (detectionConfidence < 0.4)
                             {
                                 value[1] = "false";
+
+                                // stop previous timer
+                                /*if (value[2] == "VOLUME" && VolumeControlTimer != null)
+                                {
+                                    VolumeControlTimer.Stop();
+                                    VolumeControlTimer = null;
+                                    SendCommand("status\",\"VOLUME_INACTIVE");
+                                    main.activeVolumeChange = false;
+                                }*/
                             }
                             else if (detectionConfidence > 0.7)
                             {
                                 if (value[1] == "false")
                                 {
                                     value[1] = "true";
-                                    Console.WriteLine(value[0]);
-                                    SendCommand(value[2]);
-                                    main.SetGesture(value[0]);
+
+                                    if (value[2] == "LEFT" || value[2] == "RIGHT")
+                                    {
+                                        if (main.helpWindowOpen || main.activeVolumeChange)
+                                        {
+                                            continue;
+                                        }
+                                        SendCommand("combo\",\"" + value[2]);
+                                    }
+                                    /*else if (value[2] == "VOLUME")
+                                    {
+                                        // stop previous timer
+                                        if (VolumeControlTimer != null)
+                                        {
+                                            VolumeControlTimer.Stop();
+                                        }
+
+                                        // set the timer to activate volume control
+                                        VolumeControlTimer = new Timer(main.activationTime * 1000);
+                                        VolumeControlTimer.Elapsed += EnableVolumeControl;
+                                        VolumeControlTimer.AutoReset = false;
+                                        VolumeControlTimer.Enabled = true;
+
+                                        SendCommand("status\",\"VOLUME_ACTIVATING");
+                                        continue;
+                                    }*/
+
+                                    SendCommand("action\",\"" + value[2]);
 
                                     // stop previous timer
                                     if (MaxConfidenceTimer != null)
@@ -302,10 +345,14 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
                     this.Confidence = detectionConfidence;
                 }
-                else
+                /*else
                 {
-                    main.SetState("deactive");
-                }
+                    if (main.KinectStatus)
+                    {
+                        SendCommand("status\",\"KINECT_INACTIVE");
+                        main.KinectStatus = false;
+                    }
+                }*/
             }
         }
 

@@ -63,11 +63,6 @@ public class GenFusionSCXML {
     fg.Redundancy(Speech.OPEN_HELP, SecondMod.OPEN_HELP, Output.OPEN_HELP);
     fg.Redundancy(Speech.CLOSE_HELP, SecondMod.CLOSE_HELP, Output.CLOSE_HELP);
     
-    // COMBO OUTPUT
-    fg.Single(SecondMod.COMBO_LEFT, Output.COMBO_LEFT);
-    fg.Single(SecondMod.COMBO_RIGHT, Output.COMBO_RIGHT);
-    fg.Single(Speech.COMBO_CHANGE, Output.COMBO_CHANGE);
-    
     fg.Single(Speech.SUSPEND, Output.SUSPEND);
     fg.Single(Speech.CALCULATOR, Output.CALCULATOR);
     fg.Single(Speech.READ_SLIDE, Output.READ_SLIDE);
