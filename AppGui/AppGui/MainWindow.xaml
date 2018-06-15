@@ -5,35 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppGui"
         mc:Ignorable="d"
-        Title="MainWindow" Height="60" Width="600"
+        Title="MainWindow" Height="50" Width="470"
         WindowStyle="None">
     <Grid>
-        <Label x:Name="combo_name" HorizontalAlignment="Right" Height="30" Content="Combo: -" VerticalAlignment="Top" Width="175" FontSize="14" BorderThickness="0" Margin="0,10,78,0"/>
-        <Label x:Name="action_name" HorizontalAlignment="Right" Height="30" Content="Action: -" VerticalAlignment="Top" Width="177" FontSize="14" BorderThickness="0" Margin="0,10,207,0"/>
-        <Ellipse x:Name="assistant_status" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="60,26,0,0"/>
-        <Label Content="A" HorizontalAlignment="Left" Margin="59,0,0,0" VerticalAlignment="Top"/>
-        <Ellipse x:Name="kinect_status" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="17,26,0,0"/>
-        <Label Content="K" HorizontalAlignment="Left" Margin="16,0,0,0" VerticalAlignment="Top"/>
-        <Ellipse x:Name="mouse_status" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="103,26,0,0"/>
-        <Label Content="M" HorizontalAlignment="Left" Margin="101,0,0,0" VerticalAlignment="Top"/>
-        <Button Content="?"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Width="20"
-                Margin="481,10,0,0"
-                Click="Button_Open_HelpWindow"/>
-        <Button Content="Select .pptx"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Width="20"
-                Margin="450,10,0,0"
-                Click="btnOpenFile_Click" RenderTransformOrigin="-3.15,0.8"/>
-        <Ellipse x:Name="volume_status" Width="15" Height="15" HorizontalAlignment="left" VerticalAlignment="Top" Fill="Gray" Margin="145,26,0,0"/>
-        <Label Content="V" HorizontalAlignment="Left" Margin="143,0,0,0" VerticalAlignment="Top"/>
-        <Button Content=""
+        <Image HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="kinect_status" Height="35" Source="im_icons/kinect_gray.png" Margin="5,0,0,0"/>
+        <Image HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="assistant_status" Height="35" Source="im_icons/assistant_gray.png" Margin="45,0,0,0"  />
+        <Image HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="mouse_status" Height="35" Source="im_icons/mouse_gray.png" Margin="85,0,0,0"/>
+        <Image HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="volume_status" Height="35" Source="im_icons/volume_gray.png" Margin="125,0,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="combo_name" Height="30" Content="Combo: -" Width="175" FontSize="12" BorderThickness="0" Margin="160,12,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="action_name" Height="30" Content="Action: -" Width="177" FontSize="12" BorderThickness="0" Margin="160,-5,0,0"/>
+        <Button x:Name="powerpoint_button" Height="40" Click="btnOpenFile_Click" Margin="330,0,0,0">
+            <Button.Template>
+                <ControlTemplate>
+                    <Image HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="powerpoint_status" Height="35" Source="im_icons/powerpoint_gray.png" />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="help_button" Height="40" Click="Button_Open_HelpWindow" Margin="370,0,0,0">
+            <Button.Template>
+                <ControlTemplate>
+                    <Image HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="help_status" Height="35" Source="im_icons/help_gray.png" />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="refresh_button" Height="40" Click="Button_Refresh_Powerpoint" Margin="410,0,0,0">
+            <Button.Template>
+                <ControlTemplate>
+                    <Image HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="powerpoint_status" Height="35" Source="im_icons/powerpoint_yellow.png" />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
+        <Button
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Width="20"
+            Width="10"
             Click="Button_Minimize_Window" Height="52"/>
     </Grid>
 </Window>

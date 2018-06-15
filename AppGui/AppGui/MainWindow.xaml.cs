@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Timers;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using Microsoft.Win32;
@@ -28,9 +31,9 @@ namespace AppGui
         private Timer comboTimer;
         private string comboString;
 
-        private double maxWindowWidth = 600;
-        private double medWindowWidth = 200;
-        private double minWindowWidth = 30;
+        private double maxWindowWidth = 470;
+        private double medWindowWidth = 185;
+        private double minWindowWidth = 20;
         private double screenWidth;
         private double screenHeight;
 
@@ -53,8 +56,8 @@ namespace AppGui
             this.screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
             this.screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
 
-            this.Height = 60;
-            this.Width = 600;
+            this.Height = 50;
+            this.Width = this.maxWindowWidth;
 
             this.Top = screenHeight - this.Height + 7;
             this.Left = screenWidth - this.Width + 7;
@@ -89,6 +92,12 @@ namespace AppGui
                 window = new HelpWindow();
                 window.Topmost = true;
                 window.Show();
+
+                ControlTemplate ct = help_button.Template;
+
+                Image btnImage = (Image)ct.FindName("help_status", help_button);
+
+                btnImage.Source = new BitmapImage(new Uri(@"im_icons\help_green.png", UriKind.Relative));
             });
         }
 
@@ -100,6 +109,12 @@ namespace AppGui
                 {
                     window.Close();
                     window = null;
+
+                    ControlTemplate ct = help_button.Template;
+
+                    Image btnImage = (Image)ct.FindName("help_status", help_button);
+
+                    btnImage.Source = new BitmapImage(new Uri(@"im_icons\help_gray.png", UriKind.Relative));
                 }
             });
         }
@@ -115,8 +130,15 @@ namespace AppGui
                 pptx_size = FileContent.Count;
                 pptx_current_index = 0;
                 pptx_current_block = 0;
+                
+                InternalFuncions.OpenProgram(pptx_location);
 
-                sm.Speak("O ficheiro contem " + pptx_size + " diapositivos");
+                ControlTemplate ct = powerpoint_button.Template;
+
+                Image btnImage = (Image)ct.FindName("powerpoint_status", powerpoint_button);
+
+                btnImage.Source = new BitmapImage(new Uri(@"im_icons\powerpoint_green.png", UriKind.Relative));
+
             }
         }
 
@@ -191,34 +213,34 @@ namespace AppGui
                 switch (status)
                 {
                     case "KINECT_ACTIVE":
-                        kinect_status.Fill = Brushes.Green;
+                        kinect_status.Source = new BitmapImage(new Uri(@"im_icons\kinect_green.png", UriKind.Relative));
                         break;
                     case "KINECT_INACTIVE":
-                        kinect_status.Fill = Brushes.Gray;
+                        kinect_status.Source = new BitmapImage(new Uri(@"im_icons\kinect_gray.png", UriKind.Relative));
                         break;
                     case "ASSISTANT_ACTIVE":
-                        assistant_status.Fill = Brushes.Green;
+                        assistant_status.Source = new BitmapImage(new Uri(@"im_icons\assistant_green.png", UriKind.Relative));
                         break;
                     case "ASSISTANT_INACTIVE":
-                        assistant_status.Fill = Brushes.Gray;
+                        assistant_status.Source = new BitmapImage(new Uri(@"im_icons\assistant_gray.png", UriKind.Relative));
                         break;
                     case "MOUSE_ACTIVE":
-                        mouse_status.Fill = Brushes.Green;
+                        mouse_status.Source = new BitmapImage(new Uri(@"im_icons\mouse_green.png", UriKind.Relative));
                         break;
                     case "MOUSE_ACTIVATING":
-                        mouse_status.Fill = Brushes.Yellow;
+                        mouse_status.Source = new BitmapImage(new Uri(@"im_icons\mouse_yellow.png", UriKind.Relative));
                         break;
                     case "MOUSE_INACTIVE":
-                        mouse_status.Fill = Brushes.Gray;
+                        mouse_status.Source = new BitmapImage(new Uri(@"im_icons\mouse_gray.png", UriKind.Relative));
                         break;
                     case "VOLUME_ACTIVE":
-                        volume_status.Fill = Brushes.Green;
+                        volume_status.Source = new BitmapImage(new Uri(@"im_icons\volume_green.png", UriKind.Relative));
                         break;
                     case "VOLUME_ACTIVATING":
-                        volume_status.Fill = Brushes.Yellow;
+                        volume_status.Source = new BitmapImage(new Uri(@"im_icons\volume_yellow.png", UriKind.Relative));
                         break;
                     case "VOLUME_INACTIVE":
-                        volume_status.Fill = Brushes.Gray;
+                        volume_status.Source = new BitmapImage(new Uri(@"im_icons\volume_gray.png", UriKind.Relative));
                         break;
                 }
             });
@@ -277,14 +299,14 @@ namespace AppGui
                 case "CLOSE_HELP":
                     Close_HelpWindow();
                     break;
-                case "CALCULATOR":
-                    InternalFuncions.OpenProgram("calc.exe");
-                    break;
                 case "LASER_POINTER":
                     InternalFuncions.PowerPointControl("pointer", 0);
                     break;
                 case "LASER_PEN":
                     InternalFuncions.PowerPointControl("pen", 0);
+                    break;
+                case "SUSPEND":
+                    InternalFuncions.PowerControl("sleep");
                     break;
             }
         }
@@ -404,52 +426,6 @@ namespace AppGui
                     UpdateCombo(secondCommand);
                     Console.WriteLine(secondCommand);
                     break;
-                /*case "OPEN_EMAIL":
-                    InternalFuncions.SendEmail(json);
-                    break;
-                case "MUTE":
-                    InternalFuncions.VolumeControl("mute", 0);
-                    break;
-                case "UNMUTE":
-                    InternalFuncions.VolumeControl("unmute", 0);
-                    break;
-                case "VOLUME_UP":
-                    InternalFuncions.VolumeControl("change", 2000);
-                    break;
-                case "VOLUME_DOWN":
-                    InternalFuncions.VolumeControl("change", -2000);
-                    break;
-                case "OPEN_WEATHER":
-                    InternalFuncions.OpenWeather(json);
-                    break;
-                case "OPEN_CALCULATOR":
-                    InternalFuncions.OpenProgram("calc.exe");
-                    break;
-                case "NEXT_SLIDE":
-                    InternalFuncions.PowerPointControl("next", 0);
-                    break;
-                case "PREVIOUS_SLIDE":
-                    InternalFuncions.PowerPointControl("previous", 0);
-                    break;
-                case "LASER_POINTER":
-                    InternalFuncions.PowerPointControl("pointer", 0);
-                    break;
-                case "LASER_PEN":
-                    InternalFuncions.PowerPointControl("pen", 0);
-                    break;
-                case "HIDE_SLIDE":
-                    InternalFuncions.PowerPointControl("hide", 0);
-                    break;
-                case "SUSPEND":
-                case "MAY_SUSPEND":
-                    InternalFuncions.PowerControl("sleep");
-                    break;
-                case "PAUSE":
-                    InternalFuncions.MoviePausePlay();
-                    break;
-                case "PLAY":
-                    InternalFuncions.MoviePausePlay();
-                    break;*/
             }
         }
 
@@ -486,6 +462,14 @@ namespace AppGui
                     this.Left = this.screenWidth - this.Width + 7;
                 }
             });
+        }
+
+        private void Button_Refresh_Powerpoint(object sender, RoutedEventArgs e)
+        {
+            if(pptx_location != null){
+                FileContent = Saver.GetContentFromPPTX(pptx_location);
+                sm.Speak("Ficheiro de leitura foi actualizado");
+            }
         }
     }
 }

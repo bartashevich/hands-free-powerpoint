@@ -550,6 +550,8 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         private List<MouseCoo> mousePosition = new List<MouseCoo>();
         private List<string> handStatusLog = new List<string>();
         private int mouseActivePerson = 0;
+        private int volumeActivePerson = 0;
+        private int helpActivePerson = 0;
 
         // volume control
         public bool activeVolumeChange = false;
@@ -883,16 +885,6 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                                 //Console.WriteLine("Current body: {0}", mouseActivePerson);
                                 //Console.WriteLine("Active person: {0}", body_id);
 
-                                // there is active person
-                                if (mouseActivePerson != 0)
-                                {
-                                    // active person is not this body_id
-                                    if(mouseActivePerson != body_id)
-                                    {
-                                        continue;
-                                    }
-                                }
-
                                 // right shoulder and right wrist
                                 Joint rightShoulder = body.Joints[JointType.ShoulderRight];
                                 Joint rightWrist = body.Joints[JointType.WristRight];
@@ -922,79 +914,243 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                                 Console.WriteLine("Left Wrist z: {0}", z_LeftWrist);
                                 Console.WriteLine("Head z: {0}", z_head);*/
 
-                                if (BetweenInterval(y_head, y_LeftWrist, 0.10) && BetweenInterval(z_head, z_LeftWrist, 0.10))
+                                // there is active volume person
+                                if (volumeActivePerson != 0)
                                 {
-                                    if (volumeTimer == null)
+                                    // active person is not this body_id
+                                    if (volumeActivePerson == body_id)
                                     {
-                                        volumeTimer = new Timer(activationTime * 1000);
-                                        volumeTimer.Elapsed += ActivateVolumeControl;
-                                        volumeTimer.AutoReset = false;
-                                        volumeTimer.Enabled = true;
-                                        SendCommand("status\",\"VOLUME_ACTIVATING");
+                                        // volume control
+                                        if (BetweenInterval(y_head, y_LeftWrist, 0.10) && BetweenInterval(z_head, z_LeftWrist, 0.10))
+                                        {
+                                            if (volumeTimer == null)
+                                            {
+                                                volumeTimer = new Timer(activationTime * 1000);
+                                                volumeTimer.Elapsed += ActivateVolumeControl;
+                                                volumeTimer.AutoReset = false;
+                                                volumeTimer.Enabled = true;
+                                                SendCommand("status\",\"VOLUME_ACTIVATING");
+
+                                                if(volumeActivePerson != body_id)
+                                                {
+                                                    volumeActivePerson = body_id;
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (volumeTimer != null)
+                                            {
+                                                volumeTimer.Stop();
+                                                volumeTimer = null;
+
+                                                activeVolumeChange = false;
+                                                SendCommand("status\",\"VOLUME_INACTIVE");
+
+                                                if (volumeActivePerson != 0)
+                                                {
+                                                    volumeActivePerson = 0;
+                                                }
+                                            }
+                                            else if (activeVolumeChange)
+                                            {
+                                                activeVolumeChange = false;
+                                                SendCommand("status\",\"VOLUME_INACTIVE");
+
+                                                if (volumeActivePerson != 0)
+                                                {
+                                                    volumeActivePerson = 0;
+                                                }
+                                            }
+                                        }
+
+                                        if (activeVolumeChange)
+                                        {
+                                            double volInterval = 0.10;
+
+                                            // save initial wrist position
+                                            if (currentVolumePos == 0)
+                                            {
+                                                currentVolumePos = y_wrist;
+                                            }
+
+                                            if (currentVolumePos + volInterval < y_wrist)
+                                            {
+                                                currentVolumePos = currentVolumePos + volInterval;
+                                                SendCommand("volume\",\"UP");
+                                            }
+                                            else if (currentVolumePos - volInterval > y_wrist)
+                                            {
+                                                currentVolumePos = currentVolumePos - volInterval;
+                                                SendCommand("volume\",\"DOWN");
+                                            }
+                                        }
                                     }
                                 }
                                 else
                                 {
-                                    if (volumeTimer != null)
+                                    // volume control
+                                    if (BetweenInterval(y_head, y_LeftWrist, 0.10) && BetweenInterval(z_head, z_LeftWrist, 0.10))
                                     {
-                                        volumeTimer.Stop();
-                                        volumeTimer = null;
+                                        if (volumeTimer == null)
+                                        {
+                                            volumeTimer = new Timer(activationTime * 1000);
+                                            volumeTimer.Elapsed += ActivateVolumeControl;
+                                            volumeTimer.AutoReset = false;
+                                            volumeTimer.Enabled = true;
+                                            SendCommand("status\",\"VOLUME_ACTIVATING");
 
-                                        activeVolumeChange = false;
-                                        SendCommand("status\",\"VOLUME_INACTIVE");
+                                            if (volumeActivePerson != body_id)
+                                            {
+                                                volumeActivePerson = body_id;
+                                            }
+                                        }
                                     }
-                                    else if (activeVolumeChange)
+                                    else
                                     {
-                                        activeVolumeChange = false;
-                                        SendCommand("status\",\"VOLUME_INACTIVE");
+                                        if (volumeTimer != null)
+                                        {
+                                            volumeTimer.Stop();
+                                            volumeTimer = null;
+
+                                            activeVolumeChange = false;
+                                            SendCommand("status\",\"VOLUME_INACTIVE");
+
+                                            if (volumeActivePerson != 0)
+                                            {
+                                                volumeActivePerson = 0;
+                                            }
+                                        }
+                                        else if (activeVolumeChange)
+                                        {
+                                            activeVolumeChange = false;
+                                            SendCommand("status\",\"VOLUME_INACTIVE");
+
+                                            if (volumeActivePerson != 0)
+                                            {
+                                                volumeActivePerson = 0;
+                                            }
+                                        }
+                                    }
+
+                                    if (activeVolumeChange)
+                                    {
+                                        double volInterval = 0.10;
+
+                                        // save initial wrist position
+                                        if (currentVolumePos == 0)
+                                        {
+                                            currentVolumePos = y_wrist;
+                                        }
+
+                                        if (currentVolumePos + volInterval < y_wrist)
+                                        {
+                                            currentVolumePos = currentVolumePos + volInterval;
+                                            SendCommand("volume\",\"UP");
+                                        }
+                                        else if (currentVolumePos - volInterval > y_wrist)
+                                        {
+                                            currentVolumePos = currentVolumePos - volInterval;
+                                            SendCommand("volume\",\"DOWN");
+                                        }
                                     }
                                 }
 
-                                if (activeVolumeChange)
+                                // there is active person
+                                if (helpActivePerson != 0)
                                 {
-                                    double volInterval = 0.10;
+                                    // active person is not this body_id
+                                    if (helpActivePerson == body_id)
+                                    {
+                                        // help window
+                                        if (!activeVolumeChange && (y_LeftWrist >= y_head + 0.2 || y_wrist >= y_head + 0.2))
+                                        {
+                                            if (!helpWindowOpen)
+                                            {
+                                                /*helpWindowTimer = new Timer(5 * 1000);
+                                                helpWindowTimer.Elapsed += SetHelpWindow;
+                                                helpWindowTimer.AutoReset = false;
+                                                helpWindowTimer.Enabled = true;*/
+                                                SendCommand("action\",\"OPEN_HELP");
 
-                                    // save initial wrist position
-                                    if(currentVolumePos == 0)
-                                    {
-                                        currentVolumePos = y_wrist;
-                                    }
+                                                if (helpActivePerson != body_id)
+                                                {
+                                                    helpActivePerson = body_id;
+                                                }
 
-                                    if(currentVolumePos + volInterval < y_wrist)
-                                    {
-                                        currentVolumePos = currentVolumePos + volInterval;
-                                        SendCommand("volume\",\"UP");
-                                    }
-                                    else if (currentVolumePos - volInterval > y_wrist)
-                                    {
-                                        currentVolumePos = currentVolumePos - volInterval;
-                                        SendCommand("volume\",\"DOWN");
-                                    }
-                                }
+                                                helpWindowOpen = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (helpWindowTimer != null)
+                                            {
+                                                helpWindowTimer.Stop();
+                                            }
 
-                                if (!activeVolumeChange && (y_LeftWrist >= y_head + 0.2 || y_wrist >= y_head + 0.2))
-                                {
-                                    if (!helpWindowOpen)
-                                    {
-                                        /*helpWindowTimer = new Timer(5 * 1000);
-                                        helpWindowTimer.Elapsed += SetHelpWindow;
-                                        helpWindowTimer.AutoReset = false;
-                                        helpWindowTimer.Enabled = true;*/
-                                        SendCommand("action\",\"OPEN_HELP");
-                                        helpWindowOpen = true;
+                                            if (helpWindowOpen)
+                                            {
+                                                SendCommand("action\",\"CLOSE_HELP");
+
+                                                if (helpActivePerson != 0)
+                                                {
+                                                    helpActivePerson = 0;
+                                                }
+
+                                                helpWindowOpen = false;
+                                            }
+                                        }
                                     }
                                 }
                                 else
                                 {
-                                    if(helpWindowTimer != null)
+                                    // help window
+                                    if (!activeVolumeChange && (y_LeftWrist >= y_head + 0.2 || y_wrist >= y_head + 0.2))
                                     {
-                                        helpWindowTimer.Stop();
-                                    }
+                                        if (!helpWindowOpen)
+                                        {
+                                            /*helpWindowTimer = new Timer(5 * 1000);
+                                            helpWindowTimer.Elapsed += SetHelpWindow;
+                                            helpWindowTimer.AutoReset = false;
+                                            helpWindowTimer.Enabled = true;*/
+                                            SendCommand("action\",\"OPEN_HELP");
 
-                                    if (helpWindowOpen)
+                                            if (helpActivePerson != body_id)
+                                            {
+                                                helpActivePerson = body_id;
+                                            }
+
+                                            helpWindowOpen = true;
+                                        }
+                                    }
+                                    else
                                     {
-                                        SendCommand("action\",\"CLOSE_HELP");
-                                        helpWindowOpen = false;
+                                        if (helpWindowTimer != null)
+                                        {
+                                            helpWindowTimer.Stop();
+                                        }
+
+                                        if (helpWindowOpen)
+                                        {
+                                            SendCommand("action\",\"CLOSE_HELP");
+
+                                            if (helpActivePerson != 0)
+                                            {
+                                                helpActivePerson = 0;
+                                            }
+
+                                            helpWindowOpen = false;
+                                        }
+                                    }
+                                }
+
+                                // there is active person
+                                if (mouseActivePerson != 0)
+                                {
+                                    // active person is not this body_id
+                                    if (mouseActivePerson != body_id)
+                                    {
+                                        continue;
                                     }
                                 }
 

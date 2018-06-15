@@ -61,9 +61,6 @@ namespace speechModality
             // load speech sintesizer
             tts = new Tts();
 
-            // keep assistant active (refreshing the timeout)
-            ActivateAssistant();
-
             //onRecognized(new SpeechEventArg() { Text = "MUTE", Confidence = 100, Final = true, AssistantActive = assistantActive });
 
             // send command
@@ -156,7 +153,7 @@ namespace speechModality
             onRecognized(new SpeechEventArg() { AssistantActive = assistantActive });
 
             // activate assistant for the next 15 seconds
-            activeTimer = new Timer(15 * 1000);
+            activeTimer = new Timer(30 * 1000);
             activeTimer.Elapsed += OnActivationExpired;
             activeTimer.AutoReset = false;
             activeTimer.Enabled = true;

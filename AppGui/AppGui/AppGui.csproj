@@ -157,5 +157,28 @@
       <Name>SpeakModule</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\assistant_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="im_icons\assistant_gray.png" />
+    <Resource Include="im_icons\assistant_green.png" />
+    <Resource Include="im_icons\assistant_yellow.png" />
+    <Resource Include="im_icons\help_gray.png" />
+    <Resource Include="im_icons\help_green.png" />
+    <Resource Include="im_icons\help_yellow.png" />
+    <Resource Include="im_icons\kinect_gray.png" />
+    <Resource Include="im_icons\kinect_green.png" />
+    <Resource Include="im_icons\kinect_yellow.png" />
+    <Resource Include="im_icons\mouse_gray.png" />
+    <Resource Include="im_icons\mouse_green.png" />
+    <Resource Include="im_icons\mouse_yellow.png" />
+    <Resource Include="im_icons\powerpoint_gray.png" />
+    <Resource Include="im_icons\powerpoint_green.png" />
+    <Resource Include="im_icons\powerpoint_yellow.png" />
+    <Resource Include="im_icons\volume_gray.png" />
+    <Resource Include="im_icons\volume_green.png" />
+    <Resource Include="im_icons\volume_yellow.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
