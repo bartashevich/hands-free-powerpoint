@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppGui"
         mc:Ignorable="d"
-        Title="MainWindow" Height="50" Width="470"
+        Title="MainWindow" Height="55" Width="475"
         WindowStyle="None">
     <Grid>
         <Image HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="kinect_status" Height="35" Source="im_icons/kinect_gray.png" Margin="5,0,0,0"/>
@@ -31,7 +31,7 @@
         <Button x:Name="refresh_button" Height="40" Click="Button_Refresh_Powerpoint" Margin="410,0,0,0">
             <Button.Template>
                 <ControlTemplate>
-                    <Image HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="powerpoint_status" Height="35" Source="im_icons/powerpoint_yellow.png" />
+                    <Image HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="refresh_status" Height="35" Source="im_icons/refresh_gray.png" />
                 </ControlTemplate>
             </Button.Template>
         </Button>

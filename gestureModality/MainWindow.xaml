@@ -110,5 +110,10 @@
             VerticalAlignment="Top"
             Width="103"
             Click="button_close_help" Margin="135,43,0,0" Height="20"/>
+        <Button Content="DEACTIVE USER"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Width="96"
+            Click="button_deactive_user" Margin="160,157,0,0" Height="20"/>
     </Grid>
 </Window>

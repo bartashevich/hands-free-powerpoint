@@ -25,10 +25,10 @@ public enum SecondMod implements IModality{
     // SLIDE CONTROL
     RIGHT("[action][RIGHT]",1500),
     LEFT("[action][LEFT]",1500),
-    NEXT_SLIDE("[action][NEXT_SLIDE]",1500),
-    PREV_SLIDE("[action][PREV_SLIDE]",1500),
-    OPEN_HELP("[action][OPEN_HELP]",1500),
-    CLOSE_HELP("[action][CLOSE_HELP]",1500),
+    NEXT_SLIDE("[action][NEXT_SLIDE]",1000),
+    PREV_SLIDE("[action][PREV_SLIDE]",1000),
+    OPEN_HELP("[action][OPEN_HELP]",1000),
+    CLOSE_HELP("[action][CLOSE_HELP]",1000),
     PEN("[action][PEN]",0),
     
     ;

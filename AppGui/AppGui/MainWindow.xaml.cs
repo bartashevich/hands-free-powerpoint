@@ -31,7 +31,7 @@ namespace AppGui
         private Timer comboTimer;
         private string comboString;
 
-        private double maxWindowWidth = 470;
+        private double maxWindowWidth = 475;
         private double medWindowWidth = 185;
         private double minWindowWidth = 20;
         private double screenWidth;
@@ -56,7 +56,7 @@ namespace AppGui
             this.screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
             this.screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
 
-            this.Height = 50;
+            this.Height = 55;
             this.Width = this.maxWindowWidth;
 
             this.Top = screenHeight - this.Height + 7;
@@ -306,6 +306,13 @@ namespace AppGui
                     InternalFuncions.PowerPointControl("pen", 0);
                     break;
                 case "SUSPEND":
+                    System.Threading.Thread.Sleep(1500);
+                    sm.Speak("A suspender em 3");
+                    System.Threading.Thread.Sleep(1500);
+                    sm.Speak("2");
+                    System.Threading.Thread.Sleep(1000);
+                    sm.Speak("1");
+                    System.Threading.Thread.Sleep(1000);
                     InternalFuncions.PowerControl("sleep");
                     break;
             }
@@ -468,7 +475,7 @@ namespace AppGui
         {
             if(pptx_location != null){
                 FileContent = Saver.GetContentFromPPTX(pptx_location);
-                sm.Speak("Ficheiro de leitura foi actualizado");
+                sm.Speak("Apresentação actualizada");
             }
         }
     }

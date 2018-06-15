@@ -124,7 +124,7 @@
     <onentry>
       <log label="[sspeech[action][open_help]]" expr="READY" />
       <assign name="data1" expr="${_eventdata.data}" />
-      <send id="state1-timer-sspeech[action][open_help]" event="timeout-sspeech[action][open_help]" delay="1500" target="" targettype="" namelist="" />
+      <send id="state1-timer-sspeech[action][open_help]" event="timeout-sspeech[action][open_help]" delay="1000" target="" targettype="" namelist="" />
     </onentry>
     <transition target="speech[action][open_help]-final" event="timeout-sspeech[action][open_help]" />
     <transition target="sspeech[action][open_help]-secondmod[action][open_help]" event="[action][OPEN_HELP]" />
@@ -184,7 +184,7 @@
     <onentry>
       <log label="[ssecondmod[action][close_help]]" expr="READY" />
       <assign name="data1" expr="${_eventdata.data}" />
-      <send id="state1-timer-ssecondmod[action][close_help]" event="timeout-ssecondmod[action][close_help]" delay="1500" target="" targettype="" namelist="" />
+      <send id="state1-timer-ssecondmod[action][close_help]" event="timeout-ssecondmod[action][close_help]" delay="1000" target="" targettype="" namelist="" />
     </onentry>
     <transition target="secondmod[action][close_help]-final" event="timeout-ssecondmod[action][close_help]" />
     <transition target="ssecondmod[action][close_help]-speech[action][close_help]" event="[action][CLOSE_HELP]" />
@@ -213,7 +213,7 @@
     <onentry>
       <log label="[sspeech[action][close_help]]" expr="READY" />
       <assign name="data1" expr="${_eventdata.data}" />
-      <send id="state1-timer-sspeech[action][close_help]" event="timeout-sspeech[action][close_help]" delay="1500" target="" targettype="" namelist="" />
+      <send id="state1-timer-sspeech[action][close_help]" event="timeout-sspeech[action][close_help]" delay="1000" target="" targettype="" namelist="" />
     </onentry>
     <transition target="speech[action][close_help]-final" event="timeout-sspeech[action][close_help]" />
     <transition target="sspeech[action][close_help]-secondmod[action][close_help]" event="[action][CLOSE_HELP]" />
@@ -299,7 +299,7 @@
     <onentry>
       <log label="[ssecondmod[action][open_help]]" expr="READY" />
       <assign name="data1" expr="${_eventdata.data}" />
-      <send id="state1-timer-ssecondmod[action][open_help]" event="timeout-ssecondmod[action][open_help]" delay="1500" target="" targettype="" namelist="" />
+      <send id="state1-timer-ssecondmod[action][open_help]" event="timeout-ssecondmod[action][open_help]" delay="1000" target="" targettype="" namelist="" />
     </onentry>
     <transition target="secondmod[action][open_help]-final" event="timeout-ssecondmod[action][open_help]" />
     <transition target="ssecondmod[action][open_help]-speech[action][open_help]" event="[action][OPEN_HELP]" />
@@ -366,7 +366,7 @@
     <onentry>
       <log label="[ssecondmod[action][next_slide]]" expr="READY" />
       <assign name="data1" expr="${_eventdata.data}" />
-      <send id="state1-timer-ssecondmod[action][next_slide]" event="timeout-ssecondmod[action][next_slide]" delay="1500" target="" targettype="" namelist="" />
+      <send id="state1-timer-ssecondmod[action][next_slide]" event="timeout-ssecondmod[action][next_slide]" delay="1000" target="" targettype="" namelist="" />
     </onentry>
     <transition target="secondmod[action][next_slide]-final" event="timeout-ssecondmod[action][next_slide]" />
     <transition target="ssecondmod[action][next_slide]-speech[action][next_slide]" event="[action][NEXT_SLIDE]" />
@@ -395,7 +395,7 @@
     <onentry>
       <log label="[sspeech[action][prev_slide]]" expr="READY" />
       <assign name="data1" expr="${_eventdata.data}" />
-      <send id="state1-timer-sspeech[action][prev_slide]" event="timeout-sspeech[action][prev_slide]" delay="1500" target="" targettype="" namelist="" />
+      <send id="state1-timer-sspeech[action][prev_slide]" event="timeout-sspeech[action][prev_slide]" delay="1000" target="" targettype="" namelist="" />
     </onentry>
     <transition target="speech[action][prev_slide]-final" event="timeout-sspeech[action][prev_slide]" />
     <transition target="sspeech[action][prev_slide]-secondmod[action][prev_slide]" event="[action][PREV_SLIDE]" />
@@ -500,7 +500,7 @@
     <onentry>
       <log label="[ssecondmod[action][prev_slide]]" expr="READY" />
       <assign name="data1" expr="${_eventdata.data}" />
-      <send id="state1-timer-ssecondmod[action][prev_slide]" event="timeout-ssecondmod[action][prev_slide]" delay="1500" target="" targettype="" namelist="" />
+      <send id="state1-timer-ssecondmod[action][prev_slide]" event="timeout-ssecondmod[action][prev_slide]" delay="1000" target="" targettype="" namelist="" />
     </onentry>
     <transition target="secondmod[action][prev_slide]-final" event="timeout-ssecondmod[action][prev_slide]" />
     <transition target="ssecondmod[action][prev_slide]-speech[action][prev_slide]" event="[action][PREV_SLIDE]" />
@@ -548,7 +548,7 @@
     <onentry>
       <log label="[sspeech[action][next_slide]]" expr="READY" />
       <assign name="data1" expr="${_eventdata.data}" />
-      <send id="state1-timer-sspeech[action][next_slide]" event="timeout-sspeech[action][next_slide]" delay="1500" target="" targettype="" namelist="" />
+      <send id="state1-timer-sspeech[action][next_slide]" event="timeout-sspeech[action][next_slide]" delay="1000" target="" targettype="" namelist="" />
     </onentry>
     <transition target="speech[action][next_slide]-final" event="timeout-sspeech[action][next_slide]" />
     <transition target="sspeech[action][next_slide]-secondmod[action][next_slide]" event="[action][NEXT_SLIDE]" />

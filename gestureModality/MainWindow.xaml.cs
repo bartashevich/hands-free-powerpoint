@@ -848,6 +848,14 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             }
         }
 
+        private void button_deactive_user(object sender, RoutedEventArgs e)
+        {
+            volumeActivePerson = 0;
+            mouseActivePerson = 0;
+            helpActivePerson = 0;
+
+        }
+
         /// <summary>
         /// Handles the body frame data arriving from the sensor and updates the associated gesture detector object for each body
         /// </summary>

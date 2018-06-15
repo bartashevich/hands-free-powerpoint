@@ -13,15 +13,6 @@
 				<ruleref uri="#confirmation"/>
 			</item>
 			<item>
-				<ruleref uri="#email"/>
-			</item>
-			<item>
-				<ruleref uri="#sound"/>
-			</item>
-			<item>
-				<ruleref uri="#weather"/>
-			</item>
-			<item>
 				<ruleref uri="#calculator"/>
 			</item>
 			<item>
@@ -311,7 +302,7 @@
       <item>
 				<one-of>
 					<item>ler o slide</item>
-          <item>le o slide</item>
+          <item>lê o slide</item>
 					<item>ler</item>
 				</one-of>
 				<tag>out.action="READ_SLIDE"</tag>
@@ -321,6 +312,7 @@
 					<item>continua</item>
 					<item>continua a ler</item>
           <item>ler o proximo</item>
+          <item>lê o proximo</item>
 				</one-of>
 				<tag>out.action="READ_NEXT"</tag>
 			</item>
@@ -334,6 +326,7 @@
 					<one-of>
 						<item>Suspende-te</item>
 						<item>Desliga-te</item>
+            <item>Suspender</item>
 					</one-of>
 					<tag>out.action="SUSPEND"</tag>
 				</item>

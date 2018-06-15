@@ -180,5 +180,11 @@
     <Resource Include="im_icons\volume_green.png" />
     <Resource Include="im_icons\volume_yellow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="im_icons\refresh_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="im_icons\help.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

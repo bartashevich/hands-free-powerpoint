@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppGui"
         mc:Ignorable="d"
-        Title="HelpWindow" Height="450" Width="800">
+        Title="HelpWindow" Height="650" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Content="Help section:&#xD;&#xA;- First activate kiinect..." HorizontalAlignment="Left" Margin="108,62,0,0" VerticalAlignment="Top" Height="149" Width="310"/>
+        <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="im_icons/help.png" ></Image>
     </Grid>
 </Window>
